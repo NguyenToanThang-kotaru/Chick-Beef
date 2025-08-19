@@ -12,8 +12,8 @@ export default function AdminRoutes() {
     <Routes>
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route element={<RequireAdminAuth />}>
-        <Route element={<AdminLayout />}>
-          <Route path="/admin" element={<Dashboard />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="/admin/Dashboard" element={<Dashboard />} />
           {/* <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/products" element={<ProductList />} /> */}
         </Route>

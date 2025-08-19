@@ -11,7 +11,8 @@ export default function AdminLayout() {
         <h2>Admin Panel</h2>
         <nav>
           <ul>
-            <li><Link to="/admin">Dashboard</Link></li>
+            <li><Link to="/admin/Dashboard">Dashboard</Link></li>
+            <li>abc</li>
           </ul>
         </nav>
       </aside>
