@@ -12,8 +12,6 @@ export default function AdminLayout() {
         <nav>
           <ul>
             <li><Link to="/admin">Dashboard</Link></li>
-            <li><Link to="/admin/users">Users</Link></li>
-            <li><Link to="/admin/products">Products</Link></li>
           </ul>
         </nav>
       </aside>

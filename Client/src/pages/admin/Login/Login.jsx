@@ -1,3 +1,9 @@
+function handleLogin() {
+  // alert("Đang xử lý đăng nhập...");
+  sessionStorage.setItem("isAdmin", "true");
+  window.location.href = "/admin";
+}
+
 export default function AdminLogin() {
   return (
     <div className="bg-[#CC3333] w-screen h-screen flex justify-center items-center">
@@ -36,6 +42,7 @@ export default function AdminLogin() {
         </div>
         <div className="w-full text-center mt-5">
           <button
+            onClick={handleLogin}
             className="
             bg-[#CC3333] 
             rounded-xl 
