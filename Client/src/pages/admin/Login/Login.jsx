@@ -6,12 +6,12 @@ function handleLogin() {
 
 export default function AdminLogin() {
   return (
-    <div className="bg-[#CC3333] w-screen h-screen flex justify-center items-center">
+    <div className="bg-mainRed w-screen h-screen flex justify-center items-center">
       <div
         style={{ padding: "10%", paddingTop: "2%" }}
         className="bg-[#FFF8EE] rounded-xl w-1/2 h-3/5"
       >
-        <div className="w-full text-5xl text-[#CC3333] font-bold text-center mb-15">
+        <div className="w-full text-5xl text-mainRedfont-bold text-center mb-15">
           Đăng nhập
         </div>
 
@@ -44,7 +44,7 @@ export default function AdminLogin() {
           <button
             onClick={handleLogin}
             className="
-            bg-[#CC3333] 
+            bg-mainRed
             rounded-xl 
             w-3/5 
             text-4xl 
