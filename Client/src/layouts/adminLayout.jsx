@@ -41,9 +41,7 @@ export default function AdminLayout() {
             <Link
               to="/admin/dashboard"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
-              onClick={() => {
-                setIsOpen(false);
-              }}
+              onClick={() => { setIsOpen(false) }}
             >
               Dashboard
             </Link>
@@ -60,6 +58,7 @@ export default function AdminLayout() {
             <Link
               to="/admin/products"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
+              onClick={() => { setIsOpen(false) }}
             >
               Products
             </Link>
@@ -80,6 +79,51 @@ export default function AdminLayout() {
               onClick={() => { setIsOpen(false) }}
             >
               Suppliers
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/Accounts"
+              className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
+              onClick={() => { setIsOpen(false) }}
+            >
+              Accounts
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/Customers"
+              className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
+              onClick={() => { setIsOpen(false) }}
+            >
+              Customers
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/Employees"
+              className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
+              onClick={() => { setIsOpen(false) }}
+            >
+              Employees
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/Inventory"
+              className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
+              onClick={() => { setIsOpen(false) }}
+            >
+              Inventory
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/admin/Permission"
+              className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
+              onClick={() => { setIsOpen(false) }}
+            >
+              Permission
             </Link>
           </li>
 

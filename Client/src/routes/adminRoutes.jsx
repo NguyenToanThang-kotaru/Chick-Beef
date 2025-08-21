@@ -3,8 +3,14 @@ import { Routes, Route } from "react-router-dom";
 import AdminLayout from "../layouts/adminLayout";
 import Dashboard from "../pages/admin/Dashboard/Dashboard";
 import AdminLogin from "../pages/admin/Login/Login";
-import Order from "../pages/admin/Orders/Order"
-import Supplier from "../pages/admin/Supplier/Supplier";  
+import Orders from "../pages/admin/Orders/Orders";
+import Suppliers from "../pages/admin/Suppliers/Suppliers";  
+import Accounts from "../pages/admin/Accounts/Accounts";
+import Customers from "../pages/admin/Customers/Customers";
+import Employees from "../pages/admin/Employees/Employees";
+import Inventory from "../pages/admin/Inventory/Inventory";
+import Permission from "../pages/admin/Permission/Permission";
+import Products from "../pages/admin/Products/Products";
 import RequireAdminAuth from "./RequireAdminAuth";
 // import UserList from "../pages/admin/Users/UserList";
 // import ProductList from "../pages/admin/Products/ProductList";
@@ -16,8 +22,14 @@ export default function AdminRoutes() {
       <Route element={<RequireAdminAuth />}>
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="/admin/Dashboard" element={<Dashboard />} />
-          <Route path="/admin/Orders" element={<Order />} />
-          <Route path="/admin/Suppliers" element={<Supplier />} />
+          <Route path="/admin/Orders" element={<Orders />} />
+          <Route path="/admin/Suppliers" element={<Suppliers />} />
+          <Route path="/admin/Accounts" element={<Accounts />} /> 
+          <Route path="/admin/Customers" element={<Customers />} />
+          <Route path="/admin/Employees" element={<Employees />} />
+          <Route path="/admin/Inventory" element={<Inventory />} />
+          <Route path="/admin/Permission" element={<Permission />} />
+          <Route path="/admin/Products" element={<Products />} />
           {/* <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/products" element={<ProductList />} /> */}
         </Route>
