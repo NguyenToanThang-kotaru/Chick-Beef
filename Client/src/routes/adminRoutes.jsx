@@ -11,6 +11,7 @@ import Employees from "../pages/admin/Employees/Employees";
 import Inventory from "../pages/admin/Inventory/Inventory";
 import Permission from "../pages/admin/Permission/Permission";
 import Products from "../pages/admin/Products/Products";
+import Users from "../pages/admin/Users/users"; // Ensure this import is correct
 import RequireAdminAuth from "./RequireAdminAuth";
 // import UserList from "../pages/admin/Users/UserList";
 // import ProductList from "../pages/admin/Products/ProductList";
@@ -28,10 +29,9 @@ export default function AdminRoutes() {
           <Route path="/admin/Customers" element={<Customers />} />
           <Route path="/admin/Employees" element={<Employees />} />
           <Route path="/admin/Inventory" element={<Inventory />} />
-          <Route path="/admin/Permission" element={<Permission />} />
+          <Route path="/admin/Permissions" element={<Permission />} />
           <Route path="/admin/Products" element={<Products />} />
-          {/* <Route path="/admin/users" element={<UserList />} />
-          <Route path="/admin/products" element={<ProductList />} /> */}
+          <Route path="/admin/Users" element={<Users />} />
         </Route>
       </Route>
     </Routes>

@@ -14,6 +14,14 @@ export default function AdminLayout() {
     "/admin/dashboard": "Dashboard",
     "/admin/users": "Users",
     "/admin/orders": "Orders",
+    "/admin/products": "Products",
+    "/admin/suppliers": "Suppliers",
+    "/admin/accounts": "Accounts",
+    "/admin/customers": "Customers",
+    "/admin/employees": "Employees",
+    "/admin/inventory": "Inventory",
+    "/admin/permissions": "Permissions",
+    // Add more paths and titles as needed
   };
   const title = titles[location.pathname];
 
@@ -50,6 +58,7 @@ export default function AdminLayout() {
             <Link
               to="/admin/users"
               className="block bg-[#FFFF] text-mainRed text-xl  hover:bg-[#e7e5e5] font-bold p-2 rounded"
+              onClick={()=>{setIsOpen(false)}}
             >
               Users
             </Link>
@@ -74,7 +83,7 @@ export default function AdminLayout() {
           </li>
           <li>
             <Link
-              to="/admin/Suppliers"
+              to="/admin/suppliers"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
               onClick={() => { setIsOpen(false) }}
             >
@@ -83,7 +92,7 @@ export default function AdminLayout() {
           </li>
           <li>
             <Link
-              to="/admin/Accounts"
+              to="/admin/accounts"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
               onClick={() => { setIsOpen(false) }}
             >
@@ -92,7 +101,7 @@ export default function AdminLayout() {
           </li>
           <li>
             <Link
-              to="/admin/Customers"
+              to="/admin/customers"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
               onClick={() => { setIsOpen(false) }}
             >
@@ -101,7 +110,7 @@ export default function AdminLayout() {
           </li>
           <li>
             <Link
-              to="/admin/Employees"
+              to="/admin/employees"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
               onClick={() => { setIsOpen(false) }}
             >
@@ -110,7 +119,7 @@ export default function AdminLayout() {
           </li>
           <li>
             <Link
-              to="/admin/Inventory"
+              to="/admin/inventory"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
               onClick={() => { setIsOpen(false) }}
             >
@@ -119,7 +128,7 @@ export default function AdminLayout() {
           </li>
           <li>
             <Link
-              to="/admin/Permission"
+              to="/admin/permissions"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
               onClick={() => { setIsOpen(false) }}
             >
