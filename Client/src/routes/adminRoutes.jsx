@@ -4,6 +4,7 @@ import AdminLayout from "../layouts/adminLayout";
 import Dashboard from "../pages/admin/Dashboard/Dashboard";
 import AdminLogin from "../pages/admin/Login/Login";
 import Order from "../pages/admin/Orders/Order"
+import Supplier from "../pages/admin/Supplier/Supplier";  
 import RequireAdminAuth from "./RequireAdminAuth";
 // import UserList from "../pages/admin/Users/UserList";
 // import ProductList from "../pages/admin/Products/ProductList";
@@ -16,6 +17,7 @@ export default function AdminRoutes() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="/admin/Dashboard" element={<Dashboard />} />
           <Route path="/admin/Orders" element={<Order />} />
+          <Route path="/admin/Suppliers" element={<Supplier />} />
           {/* <Route path="/admin/users" element={<UserList />} />
           <Route path="/admin/products" element={<ProductList />} /> */}
         </Route>

@@ -64,15 +64,25 @@ export default function AdminLayout() {
               Products
             </Link>
           </li>
-                    <li>
+          <li>
             <Link
               to="/admin/orders"
               className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
-              onClick={()=>{setIsOpen(false)}}
+              onClick={() => { setIsOpen(false) }}
             >
               Orders
             </Link>
           </li>
+          <li>
+            <Link
+              to="/admin/Suppliers"
+              className="block bg-[#FFFF] text-mainRed hover:bg-[#e7e5e5] text-xl font-bold p-2 rounded"
+              onClick={() => { setIsOpen(false) }}
+            >
+              Suppliers
+            </Link>
+          </li>
+
         </ul>
       </div>
       {isOpen && (
@@ -105,7 +115,7 @@ export default function AdminLayout() {
             {/* Avatar placeholder */}
             <div className="w-10 h-10 border-2 border-[#8C0004] rounded-full overflow-hidden bg-white"></div>
             <span className="text-white text-2xl">Admin01</span>
-            <button>
+            <button onClick={() => {sessionStorage.removeItem("isAdmin"); window.location.href = "/admin/login"}} className="hover:scale-105 active:scale-95">
               <img src={LogoutIcon} alt="Logout" className="w-8 h-8" />
             </button>
           </div>
