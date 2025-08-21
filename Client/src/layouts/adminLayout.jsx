@@ -33,8 +33,12 @@ export default function AdminLayout() {
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         transition-transform duration-300 ease-in-out z-50`}
       >
-        <div className="p-4 font-bold text-2xl border-b flex justify-between  border-white">
-          <h1 className="text-2xl">Administrator</h1>
+        <div className="p-4 font-bold text-2xl border-b flex justify-between cursor-pointer border-white">
+          <h1 className="text-2xl"
+            onClick={() => { setIsOpen(false); window.location.href = "/admin" }}
+          >
+            Administrator
+          </h1>
           <button>
             <img
               src={CloseIcon}
@@ -58,7 +62,7 @@ export default function AdminLayout() {
             <Link
               to="/admin/users"
               className="block bg-[#FFFF] text-mainRed text-xl  hover:bg-[#e7e5e5] font-bold p-2 rounded"
-              onClick={()=>{setIsOpen(false)}}
+              onClick={() => { setIsOpen(false) }}
             >
               Users
             </Link>
@@ -168,7 +172,7 @@ export default function AdminLayout() {
             {/* Avatar placeholder */}
             <div className="w-10 h-10 border-2 border-[#8C0004] rounded-full overflow-hidden bg-white"></div>
             <span className="text-white text-2xl">Admin01</span>
-            <button onClick={() => {sessionStorage.removeItem("isAdmin"); window.location.href = "/admin/login"}} className="hover:scale-105 active:scale-95">
+            <button onClick={() => { sessionStorage.removeItem("isAdmin"); window.location.href = "/admin/login" }} className="hover:scale-105 active:scale-95">
               <img src={LogoutIcon} alt="Logout" className="w-8 h-8" />
             </button>
           </div>
