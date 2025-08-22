@@ -179,7 +179,7 @@ export default function AdminLayout() {
         </header>
 
         {/* Nội dung chính */}
-        <main className="flex-1">
+        <main className="flex-1 ">
           <Outlet />
         </main>
       </div>
