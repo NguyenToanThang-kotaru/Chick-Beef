@@ -18,7 +18,7 @@ export default function Dashboard() {
         {/* Tab Thống Kê */}
         <TabsContent
           value="thongke"
-          className="w-full border-2 p-10 rounded-4xl h-full"
+          className="w-full border-2 p-10 rounded-4xl max-h-full"
         >
           <Statictis />
         </TabsContent>
@@ -26,7 +26,7 @@ export default function Dashboard() {
         {/* Tab Hóa Đơn */}
         <TabsContent
           value="hoadon"
-          className="w-full border-2 p-10 rounded-4xl h-full"
+          className="w-full border-2 p-10 rounded-4xl max-h-full"
         >
           <Invoices />
         </TabsContent>
