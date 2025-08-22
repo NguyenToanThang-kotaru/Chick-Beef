@@ -83,7 +83,7 @@ export default function statictics() {
         md:max-h-[60vh] /* >=768px */
         lg:max-h-[70vh] /* >=1024px */
         xl:max-h-[467px] /* >=1280px */
-        2xl:max-h-[800px] 
+        2xl:max-h-[597px] 
         "
         >
           {Array.from({ length: 20 }, (_, i) => (
@@ -103,7 +103,7 @@ export default function statictics() {
 
 
 
-      <div className="h-full w-full flex gap-5 flex-col max-h-467" >
+      <div className=" w-full flex gap-5 flex-col max-h-467" >
         <div className="flex h-2/3 gap-5 w-full">
           {/* Doanh thu theo tháng */}
           <div className="bg-white p-4 rounded-2xl shadow-md w-3/4">
@@ -179,7 +179,7 @@ export default function statictics() {
         </div>
 
         {/* Top 5 món bán chạy */}
-        <div className="bg-white h-1/3 p-4 rounded-2xl shadow-md ">
+        <div className="bg-white flex-1 p-4 rounded-2xl shadow-md ">
           <h2 className="font-bold mb-2 text-2xl text-mainBlue w-full border-b-4 border-b-mainBlue">
             Top 5 Món Bán Chạy
           </h2>
