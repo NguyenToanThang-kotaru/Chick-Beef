@@ -76,7 +76,7 @@ export default function statictics() {
       <div className="bg-white p-4 h-full w-2/7 rounded-2xl shadow-md flex flex-col">
         <h2 className="font-bold mb-5 text-mainBlue">Trạng Thái Tồn Kho</h2>
 
-        <div className="space-y-2 flex-1 overflow-y-auto pr-2 max-h-[470px]">
+        <div className="space-y-2 flex-1 overflow-y-auto pr-2 max-h-[467px]">
           {Array.from({ length: 20 }, (_, i) => (
             <div
               key={i}
@@ -94,7 +94,7 @@ export default function statictics() {
 
 
 
-      <div className="h-full w-full flex gap-5 flex-col max-h-470" >
+      <div className="h-full w-full flex gap-5 flex-col max-h-467" >
         <div className="flex h-2/3 gap-5 w-full">
           {/* Doanh thu theo tháng */}
           <div className="bg-white p-4 rounded-2xl shadow-md w-3/4">
