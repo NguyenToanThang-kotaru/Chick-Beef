@@ -1,13 +1,36 @@
-// src/pages/admin/Dashboard/Dashboard.jsx
-import React from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Statictis from "./Statictics";
+import Invoices from "./Invoice";
 export default function Dashboard() {
   return (
-    <div>
-      <h1 className="text-2xl">This is Dashboard</h1>
-      <h2>hello</h2>
-      <div className="bg-[#FFF8F0] p-4 rounded-2xl shadow-md">
+    <div className="p-6 h-full">
+      <Tabs defaultValue="thongke" className="w-full h-full">
+        {/* Thanh Tab */}
+        <TabsList className="bg-gray-200 rounded-lg p-1">
+          <TabsTrigger value="thongke" className="font-bold text-mainBlue px-4 py-2">
+            THỐNG KÊ
+          </TabsTrigger>
+          <TabsTrigger value="hoadon" className="px-4 py-2 font-bold text-mainBlue">
+            HÓA ĐƠN
+          </TabsTrigger>
+        </TabsList>
 
-      </div>
+        {/* Tab Thống Kê */}
+        <TabsContent
+          value="thongke"
+          className="w-full shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] p-10 rounded-4xl max-h-full"
+        >
+          <Statictis />
+        </TabsContent>
+
+        {/* Tab Hóa Đơn */}
+        <TabsContent
+          value="hoadon"
+          className="w-full shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] p-10 rounded-4xl max-h-full"
+        >
+          <Invoices />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
