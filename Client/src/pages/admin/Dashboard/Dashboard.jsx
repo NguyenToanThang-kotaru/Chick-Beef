@@ -7,10 +7,10 @@ export default function Dashboard() {
       <Tabs defaultValue="thongke" className="w-full h-full">
         {/* Thanh Tab */}
         <TabsList className="bg-gray-200 rounded-lg p-1">
-          <TabsTrigger value="thongke" className="font-bold text-mainBlue px-4 py-2">
+          <TabsTrigger value="thongke" className="font-bold text-mainBlue cursor-pointer px-4 py-2 hover:bg-gray-300">
             THỐNG KÊ
           </TabsTrigger>
-          <TabsTrigger value="hoadon" className="px-4 py-2 font-bold text-mainBlue">
+          <TabsTrigger value="hoadon" className="px-4 py-2 font-bold text-mainBlue cursor-pointer hover:bg-gray-300">
             HÓA ĐƠN
           </TabsTrigger>
         </TabsList>

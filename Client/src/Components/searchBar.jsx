@@ -9,8 +9,14 @@ export default function SearchBar({ placeholder = "Tìm kiếm...", onSearch }) 
     if (onSearch) onSearch(query.trim());
   };
 
+  const handleClear = () => {
+    setQuery("");
+    if (onSearch) onSearch(""); // Gọi hàm onSearch với chuỗi rỗng
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      alert.log("Searching for:", query);
       handleSearch();
     }
   };
@@ -31,7 +37,7 @@ export default function SearchBar({ placeholder = "Tìm kiếm...", onSearch }) 
       />
 
       {/* Button search */}
-      <button onClick={handleSearch}>
+      <button onClick={handleClear} className="cursor-pointer">
         <img src={clearSearch} alt="" />
       </button>
     </div>
