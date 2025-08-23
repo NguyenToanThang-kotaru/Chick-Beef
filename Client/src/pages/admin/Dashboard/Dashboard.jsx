@@ -3,7 +3,7 @@ import Statictis from "./Statictics";
 import Invoices from "./Invoice";
 export default function Dashboard() {
   return (
-    <div className="p-6 h-full">
+    <div className="p-6 h-full bg-theme">
       <Tabs defaultValue="thongke" className="w-full h-full">
         {/* Thanh Tab */}
         <TabsList className="bg-gray-200 rounded-lg p-1">

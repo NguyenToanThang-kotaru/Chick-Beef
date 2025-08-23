@@ -9,70 +9,8 @@ export default function statictics() {
   const COLORS = ["#FACC15", "#22C55E"]; // vàng và xanh lá
 
   return (
-    <div className="w-full flex max-h-full gap-5 ">
+    <div className="w-full h-full flex gap-5 ">
       {/* Trạng thái tồn kho */}
-      {/* <div className="bg-white p-4 h-10/11 w-2/7 rounded-2xl shadow-md">
-        <h2 className="font-bold mb-5 text-mainBlue">Trạng Thái Tồn Kho</h2>
-
-        <div className="space-y-2 h-full overflow-y-auto">
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 1</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 2</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 3</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 4</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 5</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 6</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 7</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-          <div className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold">
-            <div>
-              <div>Nguyên liệu 8</div>
-              <div>Còn 2 (Đơn vị tính)</div>
-            </div>
-            <div className="text-center ">Sắp hết</div>
-          </div>
-        </div>
-      </div> */}
       <div className="bg-white p-4 h-full w-2/7 rounded-2xl shadow-md flex flex-col">
         <h2 className="font-bold mb-5 text-mainBlue">Trạng Thái Tồn Kho</h2>
 
@@ -83,7 +21,7 @@ export default function statictics() {
         md:max-h-[60vh] /* >=768px */
         lg:max-h-[70vh] /* >=1024px */
         xl:max-h-[467px] /* >=1280px */
-        2xl:max-h-[800px] 
+        2xl:max-h-[597px] 
         "
         >
           {Array.from({ length: 20 }, (_, i) => (
@@ -103,35 +41,30 @@ export default function statictics() {
 
 
 
-      <div className="h-full w-full flex gap-5 flex-col max-h-467" >
+      <div className=" w-full flex gap-5 flex-col max-h-467" >
         <div className="flex h-2/3 gap-5 w-full">
           {/* Doanh thu theo tháng */}
           <div className="bg-white p-4 rounded-2xl shadow-md w-3/4">
             <h2 className="font-bold mb-2 border-b-mainBlue border-b-4 text-mainBlue text-2xl">
               Doanh Thu Theo Tháng
             </h2>
-            <div className="flex flex-col justify-between h-10/12">
+            <div className="flex flex-col justify-between h-4/5">
               {/* Danh sách ngày + giá */}
-              <ul className="space-y-1 overflow-y-auto">
-                <li className="flex font-bold text-2xl text-mainBlue justify-between">
-                  <span>17/8</span>
-                  <span>18.000.000 VND</span>
-                </li>
-                <li className="flex font-bold text-2xl text-mainBlue justify-between">
-                  <span>16/8</span>
-                  <span>18.000.000 VND</span>
-                </li>
-                <li className="flex font-bold text-2xl text-mainBlue justify-between">
-                  <span>15/8</span>
-                  <span>18.000.000 VND</span>
-                </li>
-                <li className="flex font-bold text-2xl text-mainBlue justify-between">
-                  <span>15/8</span>
-                  <span>18.000.000 VND</span>
-                </li>                <li className="flex font-bold text-2xl text-mainBlue justify-between">
-                  <span>15/8</span>
-                  <span>18.000.000 VND</span>
-                </li>
+              <ul className="
+              space-y-1 overflow-y-auto        
+              max-h-[40vh]    /* mobile */
+              sm:max-h-[50vh] /* >=640px */
+              md:max-h-[60vh] /* >=768px */
+              lg:max-h-[70vh] /* >=1024px */
+              xl:max-h-[150px] /* >=1280px */
+              2xl:max-h-[191.75px]"
+              >
+                {Array.from({ length: 20 }, (_, i) => (
+                  <li className="flex font-bold text-2xl text-mainBlue justify-between">
+                    <span>17/8</span>
+                    <span>18.000.000 VND</span>
+                  </li>
+                ))}
               </ul>
 
               {/* Tổng */}
@@ -179,7 +112,7 @@ export default function statictics() {
         </div>
 
         {/* Top 5 món bán chạy */}
-        <div className="bg-white h-1/3 p-4 rounded-2xl shadow-md ">
+        <div className="bg-white flex-1 p-4 rounded-2xl shadow-md ">
           <h2 className="font-bold mb-2 text-2xl text-mainBlue w-full border-b-4 border-b-mainBlue">
             Top 5 Món Bán Chạy
           </h2>
