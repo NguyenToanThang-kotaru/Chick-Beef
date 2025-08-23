@@ -9,7 +9,7 @@ export default function Accounts() {
   const [showAddAccount, setShowAddAccount] = useState(false);
   
   return (
-    <div style={{zIndex:"0"}}>
+    <div >
       <span style={{backgroundColor:"#2A435D",display:"flex", justifyContent:"space-between",width:"100%", height:"80px",padding:"1rem"}}>
         <SearchBar/>
         <button style={{backgroundColor:"white",borderRadius:"20px",width:"90px",cursor:"pointer",color:"#2A435D",fontWeight:"bold",marginRight:"20px",fontSize:"20px"}}
