@@ -7,25 +7,25 @@ export default function AddOrEditProduct() {
   const [showSelectIngredient, setShowSelectIngredient] = useState(false);
 
   return (
-      <div className="h-full w-full">
-        <div className="bg-[#2A435D] p-4 flex justify-end w-full">
+      <div className="h-full flex flex-col">
+        <div className="bg-[#2A435D] p-4 flex justify-end w-full h-[75px]">
           <BackButton url="./products" />
         </div>
 
-        <div className="bg-[#FFF8F0] p-1 m-1 flex overflow-y-auto">
+        <div className="bg-[#FFF8F0] m-2 flex flex-1 overflow-y-auto">
           {/* Ảnh món ăn */}
-          <div className="flex flex-col justify-start rounded-4xl m-5 px-10 py-5 gap-5 shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] grow-1">
+          <div className="flex flex-col justify-start rounded-4xl m-5 px-10 py-5 gap-4 shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] flex-1 overflow-y-auto scrollbar-hide">
             <label className="block text-3xl text-[#2A435D] font-bold ">Ảnh món ăn</label>
             <div className="w-full aspect-square bg-white shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] rounded-4xl flex items-center justify-center cursor-pointer hover:bg-gray-50 ">
               <Plus className="w-50 h-50 aspect-square text-gray-300" strokeWidth={2}></Plus>
             </div>
-            <button className="w-full bg-green-500 text-white text-bold py-3 my-4 rounded-full shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] hover:bg-green-600">
+            <button className="w-full bg-green-500 text-white text-bold py-3 my-3 rounded-full shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] hover:bg-green-600">
               Xác Nhận Thêm / Lưu Thay Đổi
             </button>
           </div>
 
           {/* Form nhập thông tin */}
-          <div className="space-y-4 m-5 px-10 py-5 rounded-4xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] grow-2">
+          <div className="space-y-4 m-5 px-10 py-5 rounded-4xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] flex-2 overflow-y-auto scrollbar-hide">
             {/* Mã món ăn */}
             <div>
               <label className="block text-3xl text-[#2A435D] font-bold mb-1">Mã món ăn</label>
@@ -51,7 +51,7 @@ export default function AddOrEditProduct() {
             <div>
               <label className="block text-3xl text-[#2A435D] font-bold mb-1">Công thức</label>
               <div className="w-full rounded-2xl">
-                <div className="overflow-auto bg-white w-full rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] h-40 px-4 py-2 ">
+                <div className="overflow-auto scrollbar-hide bg-white w-full rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] h-40 px-4 py-2 ">
                   <table className="w-full">
                     <tbody>
                       <tr>
