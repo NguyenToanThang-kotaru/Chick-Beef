@@ -2,11 +2,11 @@ import React from "react";
 // import { useState } from "react";
 
 
-export default function AddAccount() {
+export default function AddAccount({onBack}) {
     // const [showAddAccount, setShowAddAccount] = useState(false);
     return(
-        <div className="add-overlay" style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}>
-            <div className="addForm" style={{margin:"40px",borderRadius:"12px",boxShadow:"0 4px 12px rgba(0,0,0,0.2)",padding:"20px 30px",width:"400px"}}>
+        <div className="add-overlay" style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",position:"fixed",margin:"0 0",backgroundColor:"rgba(0, 0, 0, 0.4)",height:"100vh"}}>
+            <div className="addForm" style={{marginTop:"20px",borderRadius:"12px",boxShadow:"0 4px 12px rgba(0,0,0,0.2)",padding:"20px 30px",width:"400px",zIndex:"2",backgroundColor:"#FFF8EE"}}>
                 <h2 style={{fontSize:"28px",color:"#2A435D",fontWeight:"bold",borderBottom:"4px solid #2A435D"}}>Thêm Tài Khoản</h2>
                 <form style={{display:"flex",flexDirection:"column",gap:"10px",marginTop:"20px"}}>
                     <label htmlFor="ID">ID</label>
@@ -26,11 +26,11 @@ export default function AddAccount() {
                         <option>User</option>
 
                     </select>
-                    <div className="Action" style={{display:"flex",flexDirection:"column"}}>
-                        <button type="submit">
+                    <div className="Action" style={{display:"flex",flexDirection:"column",padding:"10px",}}>
+                        <button type="submit" style={stylebtnSubmit } >
                             Xác nhận thêm
                         </button>
-                        <button type="button">
+                        <button type="button" style={stylebtnExit} onClick={onBack}>
                             Thoát
                         </button>
                     </div>
@@ -46,4 +46,26 @@ const styleInputSelect={
     border:"1px solid black",
     backgroundColor:"white"
 
+}
+const stylebtnSubmit={
+    padding:"5px",
+    margin:"10px",
+    border:"1px solid black",
+    color:"white",
+    borderRadius:"12px",
+    backgroundColor:"#37AA58",
+    fontSize:"20px"
+
+
+
+}
+const stylebtnExit={
+    padding:"5px",
+    margin:"10px",
+    border:"1px solid black",
+    color:"white",
+    borderRadius:"12px",
+    backgroundColor:"#EA161A",
+    fontSize:"20px",
+    cursor:"pointer"
 }
