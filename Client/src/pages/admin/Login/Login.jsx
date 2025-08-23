@@ -11,7 +11,7 @@ export default function AdminLogin() {
         style={{ padding: "10%", paddingTop: "2%" }}
         className="bg-[#FFF8EE] rounded-xl w-1/2 h-3/5"
       >
-        <div className="w-full text-5xl text-mainRedfont-bold text-center mb-15">
+        <div className="w-full text-5xl text-mainRed font-bold text-center mb-5">
           Đăng nhập
         </div>
 
@@ -20,11 +20,8 @@ export default function AdminLogin() {
           <input
             id="usr"
             type="text"
-            className="mb-4 bg-[#FFFFFF] w-full rounded-xl p-3 inset-shadow-xs/10"
-            style={{
-              boxShadow:
-                "inset 1px 0 6px rgba(0,0,0,0.1), inset -1px 0 1px rgba(0,0,0,0.1)",
-            }}
+            className="mb-4 bg-[#FFFFFF] w-full rounded-xl p-3 shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)]"
+
           />
         </div>
 
@@ -33,11 +30,8 @@ export default function AdminLogin() {
           <input
             id="pwd"
             type="text"
-            className="bg-[#FFFFFF] w-full rounded-xl p-3"
-            style={{
-              boxShadow:
-                "inset 1px 0 6px rgba(0,0,0,0.1), inset -1px 0 1px rgba(0,0,0,0.1)",
-            }}
+            className="bg-[#FFFFFF] w-full rounded-xl p-3 shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)]"
+
           />
         </div>
         <div className="w-full text-center mt-5">
@@ -50,6 +44,7 @@ export default function AdminLogin() {
             text-4xl 
             text-white 
             p-5
+            font-bold
             shadow-md
             transition 
             duration-300 
