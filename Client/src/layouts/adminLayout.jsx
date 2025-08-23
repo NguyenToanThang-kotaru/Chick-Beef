@@ -151,7 +151,7 @@ export default function AdminLayout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <header className="bg-mainRed flex justify-between items-center p-4">
+        <header className="bg-mainRed flex justify-between items-center p-4 h-[65px] ">
           {/* Nút bấm toggle sidebar */}
           <div className="w-1/3 flex justify-start gap-5 items-center">
             <button onClick={() => setIsOpen(!isOpen)}>
@@ -179,7 +179,7 @@ export default function AdminLayout() {
         </header>
 
         {/* Nội dung chính */}
-        <main className="flex-1">
+        <main className="flex-1 overflow-y-auto scrollbar-hide">
           <Outlet />
         </main>
       </div>

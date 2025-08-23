@@ -11,8 +11,8 @@ export default function Products() {
   }
 
   return (
-    <div className="h-full">
-      <div className="bg-[#2A435D] p-4 flex items-center justify-between">
+    <div className="h-full flex flex-col">
+      <div className="bg-[#2A435D] p-4 flex items-center justify-between h-[75px]">
         <SearchBar></SearchBar>
         <button 
           className="bg-white text-[#2A435D] font-bold px-6 h-12 rounded-full text-xl shadow-md hover:bg-gray-100 flex items-center justify-center"
@@ -20,19 +20,19 @@ export default function Products() {
         >
           <span>THÊM</span>
         </button>
-
       </div>
-      <div className="bg-[#FFF8F0] p-4 m-5 rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)]">
-        <Table
+
+      <div className="bg-[#FFF8F0] p-4 m-5 rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] flex-1 overflow-y-auto scrollbar-hide">
+        <Table className=""
           data={[
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 30, city: "New York", hello: "world", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
           ]}
         />
       </div>
