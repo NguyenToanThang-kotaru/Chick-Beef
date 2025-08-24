@@ -5,9 +5,11 @@ import Table from "../../../Components/table_cpn";
 import eye from "../../../assets/Icon/Eye.png";
 import pd from "../../../assets/Icon/product.png";
 import AddAccount from "./AddAcount";
+import EditAccount from "./EditAccount";
+
 export default function Accounts() {
   const [showAddAccount, setShowAddAccount] = useState(false);
-  
+  const [showEditAccount, setShowEditAccount]=useState(false);
   return (
     <div >
       <span style={{backgroundColor:"#2A435D",display:"flex", justifyContent:"space-between",width:"100%", height:"80px",padding:"1rem"}}>
@@ -19,15 +21,18 @@ export default function Accounts() {
       </span>
 
       {showAddAccount && (
-        <AddAccount onBack={() => setShowAddAccount(false)} />
+        <AddAccount onBackAdd={() => setShowAddAccount(false)} />
+      )}  
+      {showEditAccount && (
+        <EditAccount onBackEdit={() => setShowEditAccount(false)} />
       )}  
       
       <div className="bg-[#FFF8F0] p-4 rounded-2xl shadow-md">
           <Table
             data={[
-              { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 123456789, city: "Newwwwwwwwwwww", hello: "Gôddddddddd", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-              { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 123456789, city: "Newwwwwwwwwwww", hello: "Gôddddddddd", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-              { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 123456789, city: "Newwwwwwwwwwww", hello: "Gôddddddddd", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
+              { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 123456789, city: "Newwwwwwwwwwww", hello: "Gôddddddddd", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" />,edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" onClick={()=>setShowEditAccount(true)} />},
+              { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 123456789, city: "Newwwwwwwwwwww", hello: "Gôddddddddd", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" />,edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" />},
+              { name: <img src={pd} alt="eye" className="w-25 h-25 cursor-pointer" />, age: 123456789, city: "Newwwwwwwwwwww", hello: "Gôddddddddd", nickname: "JohnDoe", phone: "123-456-7890", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" />,edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
           ]}
           />
       </div>
