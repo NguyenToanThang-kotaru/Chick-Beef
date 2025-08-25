@@ -26,6 +26,7 @@ export default function AdminLogin() {
 
         // Lưu role/token từ server
         sessionStorage.setItem("isAdmin", "true");
+        sessionStorage.setItem("infor", data);
         // sessionStorage.setItem("token", data.token);
 
         setTimeout(() => {
