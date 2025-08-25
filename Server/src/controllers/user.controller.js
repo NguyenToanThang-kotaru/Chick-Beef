@@ -1,4 +1,4 @@
-const userService = require('../services/user.service');
+const userService = require("../services/user.service");
 
 exports.getAllUsers = (req, res) => {
   userService.getAllUsers((err, results) => {
@@ -33,12 +33,12 @@ exports.getUsers = (req, res) => {
     if (err) return res.status(500).json({ error: err });
     res.json(results);
   });
-}
+};
 
 exports.createUser = (req, res) => {
   const newUser = req.body;
   userService.createUser(newUser, (err, result) => {
     if (err) return res.status(500).json({ error: err });
-    res.json({ message: 'User created!', id: result.insertId });
+    res.json({ message: "User created!", id: result.insertId });
   });
 };
