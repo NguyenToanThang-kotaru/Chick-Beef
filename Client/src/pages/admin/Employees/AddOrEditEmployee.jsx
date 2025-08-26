@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function AddOrEditProduct({ onClose }) {
+export default function AddOrEditEmployee({ onClose }) {
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 cursor-pointer" onClick={onClose}>
       <div className="bg-[#FFF8F0] rounded-2xl shadow-xl w-[450px] p-6 cursor-auto" onClick={(e) => e.stopPropagation()}>
