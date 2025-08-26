@@ -22,7 +22,7 @@ export default function Products() {
         </button>
       </div>
 
-      <div className="bg-[#FFF8F0] p-4 m-5 rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] flex-1 overflow-y-auto scrollbar-hide">
+      <div className="bg-[#FFF8F0] m-5 rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] flex-1 overflow-y-auto scrollbar-hide">
         <Table className=""
           data={[
             { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
