@@ -1,10 +1,44 @@
-function handleLogin() {
-  // alert("Đang xử lý đăng nhập...");
-  sessionStorage.setItem("isAdmin", "true");
-  window.location.href = "/admin";
-}
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AdminLogin() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await fetch("http://localhost:3700/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (data.error) {
+        toast.error("Lỗi: " + data.error);
+      } else if (data.message === "Invalid credentials") {
+        toast.error("Sai tài khoản hoặc mật khẩu!");
+      } else {
+        toast.success("Đăng nhập thành công!");
+        console.log("Thông tin user:", data.user);
+
+        // Lưu role/token từ server
+        sessionStorage.setItem("isAdmin", "true");
+        sessionStorage.setItem("infor", data);
+        // sessionStorage.setItem("token", data.token);
+
+        setTimeout(() => {
+          window.location.href = "/admin";
+        }, 1000); // delay chút cho toast hiển thị
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+      toast.error("Lỗi kết nối server!");
+    }
+  };
+
   return (
     <div className="bg-mainRed w-screen h-screen flex justify-center items-center">
       <div
@@ -19,9 +53,10 @@ export default function AdminLogin() {
           <h2 className="mb-4">Tài khoản:</h2>
           <input
             id="usr"
+            value={username}
             type="text"
             className="mb-4 bg-[#FFFFFF] w-full rounded-xl p-3 shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)]"
-
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 
@@ -29,38 +64,25 @@ export default function AdminLogin() {
           <h2 className="mb-4">Mật khẩu:</h2>
           <input
             id="pwd"
-            type="text"
+            value={password}
+            type="password"
             className="bg-[#FFFFFF] w-full rounded-xl p-3 shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)]"
-
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
         <div className="w-full text-center mt-5">
           <button
             onClick={handleLogin}
-            className="
-            bg-mainRed
-            rounded-xl 
-            w-3/5 
-            text-4xl 
-            text-white 
-            p-5
-            font-bold
-            shadow-md
-            transition 
-            duration-300 
-            ease-in-out 
-            hover:bg-[#b12a2a] 
-            hover:shadow-xl
-            hover:scale-105
-            active:scale-95
-            active:bg-[#a02222]
-            active:shadow-inner
-            "
+            className="bg-mainRed rounded-xl w-3/5 text-4xl text-white p-5 font-bold shadow-md transition duration-300 ease-in-out hover:bg-[#b12a2a] hover:shadow-xl hover:scale-105 active:scale-95 active:bg-[#a02222] active:shadow-inner"
           >
             Đăng nhập
           </button>
         </div>
       </div>
+
+      {/* Toast Container phải nằm trong cây DOM */}
+      <ToastContainer position="top-right" autoClose={2000} />
     </div>
   );
 }
