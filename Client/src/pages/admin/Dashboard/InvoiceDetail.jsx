@@ -4,7 +4,7 @@ export default function InvoiceDetail({ open, onClose, invoice }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-[#FBF7F0] p-6 rounded-2xl w-[600px] shadow-lg">
         {/* Tiêu đề */}
         <h2 className="text-center text-2xl font-bold mb-4">CHICK AND BEEF</h2>
