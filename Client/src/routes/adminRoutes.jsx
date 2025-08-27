@@ -12,7 +12,7 @@ import Inventory from "../pages/admin/Inventory/Inventory";
 import Permission from "../pages/admin/Permission/Permission";
 import Products from "../pages/admin/Products/Products";
 import Users from "../pages/admin/Users/users"; // Ensure this import is correct
-import RequireAdminAuth from "./RequireAdminAuth";
+import RequireAdminAuth from "../middleware/RequireAdminAuth";
 // import UserList from "../pages/admin/Users/UserList";
 // import ProductList from "../pages/admin/Products/ProductList";
 
