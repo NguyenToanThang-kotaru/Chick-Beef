@@ -26,7 +26,7 @@ export default function App() {
         theme="colored"
       />
       
-      <BreakpointIndicator />
+      {/* <BreakpointIndicator /> */}
     </BrowserRouter>
   );
 }

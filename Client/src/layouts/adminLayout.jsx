@@ -172,7 +172,7 @@ export default function AdminLayout() {
             {/* Avatar placeholder */}
             <div className="w-10 h-10 border-2 border-[#8C0004] rounded-full overflow-hidden bg-white"></div>
             <span className="text-white text-2xl">Admin01</span>
-            <button onClick={() => { sessionStorage.removeItem("isAdmin"); window.location.href = "/admin/login" }} className="hover:scale-105 active:scale-95">
+            <button onClick={() => { sessionStorage.removeItem("accessToken");sessionStorage.removeItem("refreshToken");sessionStorage.removeItem("isAdmin"); window.location.href = "/admin/login" }} className="hover:scale-105 active:scale-95">
               <img src={LogoutIcon} alt="Logout" className="w-8 h-8" />
             </button>
           </div>

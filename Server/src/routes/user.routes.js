@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller');
+const authenticateToken = require('../middleware/authMiddleware');
 
 // GET /api/users
-router.get('/', userController.getAllUsers);
+router.get('/',authenticateToken.authenticateToken ,userController.getAllUsers);
 
 // POST /api/users
-router.post('/', userController.createUser);
+router.post('/create',authenticateToken.authenticateToken, userController.createUser);
 
 // POST /api/users/login
 router.post('/login', userController.login);

@@ -22,12 +22,13 @@ export default function AdminLogin() {
         toast.error("Sai tài khoản hoặc mật khẩu!");
       } else {
         toast.success("Đăng nhập thành công!");
-        console.log("Thông tin user:", data.user);
+        console.log("Thông tin user:", data);
 
         // Lưu role/token từ server
-        sessionStorage.setItem("isAdmin", "true");
-        sessionStorage.setItem("infor", data);
-        // sessionStorage.setItem("token", data.token);
+        // sessionStorage.setItem("user",data.user);
+        sessionStorage.setItem("isAdmin", true);
+        sessionStorage.setItem("accessToken", data.accessToken);
+        sessionStorage.setItem("refreshToken", data.refreshToken);
 
         setTimeout(() => {
           window.location.href = "/admin";
