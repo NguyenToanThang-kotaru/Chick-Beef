@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const userRoutes = require('./src/routes/user.routes');
 // const authRoutes = require('./src/routes/auth.routes');
 const ingredientRoutes = require('./src/routes/ingredient.routes')
+const invoiceRoutes = require('./src/routes/invoice.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -18,6 +19,8 @@ app.use('/api/users', userRoutes);
 // app.use('/api/auth', authRoutes);
 
 app.use('/api/ingredient', ingredientRoutes)
+
+app.use('/api/invoice', invoiceRoutes)
 // start server
 const PORT = 3700;
 app.listen(PORT, () => {
