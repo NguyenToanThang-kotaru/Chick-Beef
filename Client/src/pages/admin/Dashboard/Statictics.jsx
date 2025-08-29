@@ -1,7 +1,30 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import "../../../../src/index.css";
+import axiosClient from "../../../middleware/axiosClient";
+import { useState, useEffect } from "react";
+// import { ToastContainer, toast } from "react-toastify";
 
 export default function statictics() {
+  const [ingredients, setIngredients] = useState([]);
+  //Render ingredients hoo
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      try {
+        const res = await axiosClient.get("/ingredient/");
+        if (JSON.stringify(res.data) !== JSON.stringify(ingredients)) {
+          // console.log("Cập nhật nguyên liệu:", res.data);
+          setIngredients(res.data); // chỉ update nếu khác
+          // toast.success("Cập nhật nguyên liệu thành công!");
+        }
+      } catch (err) {
+        console.error("Lỗi khi lấy dữ liệu nguyên liệu:", err);
+      }
+    };
+    fetchIngredients();
+  }, []);
+
+  //Render Revenue
+
   const data = [
     { name: "Mang về", value: 60 },
     { name: "Tại quán", value: 40 },
@@ -24,18 +47,23 @@ export default function statictics() {
         2xl:max-h-[597px] 
         "
         >
-          {Array.from({ length: 20 }, (_, i) => (
-            <div
-              key={i}
-              className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold"
-            >
-              <div>
-                <div>Nguyên liệu {i + 1}</div>
-                <div>Còn 2 (Đơn vị tính)</div>
+          {ingredients
+            // .filter(item => item.SoLuongTon < 10) // chỉ những món sắp hết
+            .sort((a, b) => a.SoLuongTon - b.SoLuongTon) // sắp xếp tăng dần số lượng tồn
+            .map((item, i) => (
+              <div
+                key={item.id || i} // ưu tiên id từ DB
+                className="bg-mainRed border-4 border-[#8C0004] justify-between items-center flex text-white p-2 rounded-3xl font-bold"
+              >
+                <div>
+                  <div>{item.TenNL}</div>
+                  <div>Còn {item.SoLuongTon} ({item.DonViNL})</div>
+                </div>
+                <div className="text-center">
+                  {item.quantity < 5 ? "Sắp hết" : "Đủ dùng"}
+                </div>
               </div>
-              <div className="text-center">Sắp hết</div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
 

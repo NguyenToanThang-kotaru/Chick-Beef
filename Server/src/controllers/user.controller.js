@@ -34,10 +34,17 @@ exports.login = (req, res) => {
     const refreshToken = jwt.sign(
       { username: user.username, role: user.role },
       process.env.REFRESH_TOKEN_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "15h" }
     );
 
-    res.json({ message: "Login successful", user, accessToken, refreshToken });
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: false, // true nếu dùng https
+      sameSite: "lax",
+      path: "/" // chỉ gửi khi call /refresh
+    });
+
+    res.json({ message: "Login successful", user, accessToken });
   });
 };
 

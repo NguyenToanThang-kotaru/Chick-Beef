@@ -1,47 +1,42 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import axiosClient from "../../../middleware/axiosClient";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async () => {
-    try {
-      const res = await fetch("http://localhost:3700/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+const handleLogin = async () => {
+  try {
+    const res = await axiosClient.post("/users/login", { username, password });
+    const data = res.data;
 
-      const data = await res.json();
+    if (data.error) {
+      toast.error("Lỗi: " + data.error);
+    } else if (data.message === "Invalid credentials") {
+      toast.error("Sai tài khoản hoặc mật khẩu!");
+    } else {
+      toast.success("Đăng nhập thành công!");
 
-      if (data.error) {
-        toast.error("Lỗi: " + data.error);
-      } else if (data.message === "Invalid credentials") {
-        toast.error("Sai tài khoản hoặc mật khẩu!");
-      } else {
-        toast.success("Đăng nhập thành công!");
-        console.log("Thông tin user:", data);
+      sessionStorage.setItem("isAdmin", true);
+      sessionStorage.setItem("accessToken", data.accessToken);
 
-        // Lưu role/token từ server
-        // sessionStorage.setItem("user",data.user);
-        sessionStorage.setItem("isAdmin", true);
-        sessionStorage.setItem("accessToken", data.accessToken);
-        sessionStorage.setItem("refreshToken", data.refreshToken);
-
-        setTimeout(() => {
-          window.location.href = "/admin";
-        }, 1000); // delay chút cho toast hiển thị
-      }
-    } catch (err) {
-      console.error("Fetch error:", err);
-      toast.error("Lỗi kết nối server!");
+      setTimeout(() => {
+        window.location.href = "/admin";
+      }, 1000);
     }
-  };
+  } catch (err) {
+    console.error("Axios error:", err);
+    toast.error("Lỗi kết nối server!");
+  }
+};
+
 
   return (
-    <div className="bg-mainRed w-screen h-screen flex justify-center items-center">
+    <div className="bg-mainRed w-screen h-screen flex justify-center items-center"
+    onKeyDown={(e) => { if (e.key === 'Enter') handleLogin(); }}
+    >
       <div
         style={{ padding: "10%", paddingTop: "2%" }}
         className="bg-[#FFF8EE] rounded-xl w-1/2 h-3/5"
@@ -74,6 +69,7 @@ export default function AdminLogin() {
 
         <div className="w-full text-center mt-5">
           <button
+            
             onClick={handleLogin}
             className="bg-mainRed rounded-xl w-3/5 text-4xl text-white p-5 font-bold shadow-md transition duration-300 ease-in-out hover:bg-[#b12a2a] hover:shadow-xl hover:scale-105 active:scale-95 active:bg-[#a02222] active:shadow-inner"
           >

@@ -4,13 +4,13 @@ const jwt = require("jsonwebtoken");
 
 // POST /api/auth/refresh
 router.post("/refresh", (req, res) => {
-  const { refreshToken } = req.body;
+  const refreshToken = req.cookies.refreshToken; // lấy từ cookie
   if (!refreshToken) {
     return res.status(401).json({ message: "Refresh token required" });
   }
   jwt.verify(
     refreshToken,
-    (process.env.REFRESH_TOKEN_SECRET = supersecretrefreshtoken),
+    process.env.REFRESH_TOKEN_SECRET,
     (err, user) => {
       if (err) {
         return res
@@ -27,3 +27,5 @@ router.post("/refresh", (req, res) => {
     }
   );
 });
+
+module.exports = router;

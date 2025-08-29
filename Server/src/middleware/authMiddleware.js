@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-
+require('dotenv').config();
 // Middleware xác thực token
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -7,9 +7,13 @@ function authenticateToken(req, res, next) {
 
   if (!token) return res.status(401).json({ message: "Thiếu token" });
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ message: "Token không hợp lệ" });
-    req.user = user; // gắn thông tin user vào request
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      console.error("Token lỗi:", token);
+      console.error("Chi tiết lỗi:", err.name, err.message);
+      return res.status(403).json({ message: "Token không hợp lệ", error: err.message });
+    }
+    req.user = user;
     next();
   });
 }
