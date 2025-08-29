@@ -1,4 +1,6 @@
 const userService = require("../services/user.service");
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
 
 exports.getAllUsers = (req, res) => {
   userService.getAllUsers((err, results) => {
@@ -23,7 +25,19 @@ exports.login = (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    res.json({ message: "Login successful", user });
+    const accessToken = jwt.sign(
+      { username: user.username, role: user.role }, // payload
+      process.env.ACCESS_TOKEN_SECRET, // secret key
+      { expiresIn: "15m" } // thời gian sống
+    );
+
+    const refreshToken = jwt.sign(
+      { username: user.username, role: user.role },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.json({ message: "Login successful", user, accessToken, refreshToken });
   });
 };
 
