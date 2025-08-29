@@ -114,7 +114,7 @@ export default function Statistics() {
                       className="flex font-bold text-2xl text-mainBlue justify-between"
                     >
                       <span>
-                        {new Date(item.NgayXuat).toLocaleDateString("vi-VN")}
+                        {new Date(item.Ngay).toLocaleDateString("vi-VN")}
                       </span>
                       <span>
                         {Number(item.TongTien).toLocaleString("vi-VN")} VND

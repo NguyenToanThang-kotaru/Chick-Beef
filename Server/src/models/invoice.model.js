@@ -20,7 +20,7 @@ exports.getLastInvoiceId = (callback) => {
 };
 
 exports.addInvoice = (data, callback) => {
-  const {MaHD, MaNV, MaKH, TongTien, NgayXuat} = data;
+  const { MaHD, MaNV, MaKH, TongTien, NgayXuat } = data;
   const sql = "INSERT INTO hoadon (MaHD, MaNV, MaKH, TongTien, NgayXuat) VALUES (?, ?, ?, ?, ?)";
   db.query(sql, [MaHD, MaNV, MaKH, TongTien, NgayXuat], (err, result) => {
     if (err) return callback(err);
@@ -31,10 +31,14 @@ exports.addInvoice = (data, callback) => {
 // Lấy hóa đơn theo tháng và năm
 exports.getInvoicesByMonth = (month, year, callback) => {
   const sql = `
-    SELECT * 
+    SELECT 
+      DATE(NgayXuat) AS Ngay,
+      COUNT(*) AS SoHoaDon,
+      SUM(TongTien) AS TongTien
     FROM hoadon 
     WHERE MONTH(NgayXuat) = ? AND YEAR(NgayXuat) = ?
-    ORDER BY NgayXuat ASC
+    GROUP BY DATE(NgayXuat)
+    ORDER BY Ngay ASC
   `;
   db.query(sql, [month, year], (err, results) => {
     if (err) return callback(err);
