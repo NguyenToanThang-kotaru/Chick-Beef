@@ -28,7 +28,7 @@ exports.login = (req, res) => {
     const accessToken = jwt.sign(
       { username: user.username, role: user.role }, // payload
       process.env.ACCESS_TOKEN_SECRET, // secret key
-      { expiresIn: "15m" } // thời gian sống
+      { expiresIn: "30m" } // thời gian sống
     );
 
     const refreshToken = jwt.sign(

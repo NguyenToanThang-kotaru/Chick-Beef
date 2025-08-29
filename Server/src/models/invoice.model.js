@@ -27,3 +27,17 @@ exports.addInvoice = (data, callback) => {
     callback(null, result);
   });
 };
+
+// Lấy hóa đơn theo tháng và năm
+exports.getInvoicesByMonth = (month, year, callback) => {
+  const sql = `
+    SELECT * 
+    FROM hoadon 
+    WHERE MONTH(NgayXuat) = ? AND YEAR(NgayXuat) = ?
+    ORDER BY NgayXuat ASC
+  `;
+  db.query(sql, [month, year], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+};

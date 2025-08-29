@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 router.post("/refresh", (req, res) => {
   const refreshToken = req.cookies.refreshToken; // lấy từ cookie
   if (!refreshToken) {
-    return res.status(401).json({ message: "Refresh token required" });
+    return res.status(401).json({ message: "Khong co token" });
   }
   jwt.verify(
     refreshToken,

@@ -12,6 +12,9 @@ router.get('/', authenticateToken.authenticateToken, invoiceController.getAllInv
 // GET /api/invoice/:id
 router.get('/:id', authenticateToken.authenticateToken, invoiceController.getInvoiceById);
 
+//GET /api/invoice/:id
+router.get('/month/:year/:month', authenticateToken.authenticateToken,invoiceController.getInvoicesByMonth);
+
 // POST /api/invoice
 router.post('/', authenticateToken.authenticateToken, invoiceController.addInvoice);
 

@@ -1,20 +1,20 @@
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import "../../../../src/index.css";
 import axiosClient from "../../../middleware/axiosClient";
 import { useState, useEffect } from "react";
-// import { ToastContainer, toast } from "react-toastify";
 
-export default function statictics() {
+export default function Statistics() {
   const [ingredients, setIngredients] = useState([]);
-  //Render ingredients hoo
+  const [revenue, setRevenue] = useState([]);
+  let totalProfit = 0;
+
+  // Lấy danh sách nguyên liệu
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const res = await axiosClient.get("/ingredient/");
+        const res = await axiosClient.get("/ingredient");
         if (JSON.stringify(res.data) !== JSON.stringify(ingredients)) {
-          // console.log("Cập nhật nguyên liệu:", res.data);
-          setIngredients(res.data); // chỉ update nếu khác
-          // toast.success("Cập nhật nguyên liệu thành công!");
+          setIngredients(res.data);
         }
       } catch (err) {
         console.error("Lỗi khi lấy dữ liệu nguyên liệu:", err);
@@ -23,8 +23,23 @@ export default function statictics() {
     fetchIngredients();
   }, []);
 
-  //Render Revenue
-
+  // Lấy doanh thu trong tháng
+  useEffect(() => {
+    const fetchRevenueInMonth = async () => {
+      try {
+        const res = await axiosClient.get("/invoice/month/2025/8");
+        setRevenue(res.data); // lưu vào state
+        console.log("Doanh thu:", res.data);
+      } catch (err) {
+        console.error("Lỗi khi lấy doanh thu trong tháng:", err);
+      }
+    };
+    fetchRevenueInMonth();
+  }, []); // chỉ gọi 1 lần khi mount
+  
+    for (const item of revenue) {
+      totalProfit += Number(item.TongTien);
+    }
   const data = [
     { name: "Mang về", value: 60 },
     { name: "Tại quán", value: 40 },
@@ -37,7 +52,8 @@ export default function statictics() {
       <div className="bg-white p-4 h-full w-2/7 rounded-2xl shadow-md flex flex-col">
         <h2 className="font-bold mb-5 text-mainBlue">Trạng Thái Tồn Kho</h2>
 
-        <div className=" 
+        <div
+          className=" 
         space-y-2 flex-1 overflow-y-auto pr-2
         max-h-[40vh]    /* mobile */
         sm:max-h-[50vh] /* >=640px */
@@ -57,7 +73,9 @@ export default function statictics() {
               >
                 <div>
                   <div>{item.TenNL}</div>
-                  <div>Còn {item.SoLuongTon} ({item.DonViNL})</div>
+                  <div>
+                    Còn {item.SoLuongTon} ({item.DonViNL})
+                  </div>
                 </div>
                 <div className="text-center">
                   {item.quantity < 5 ? "Sắp hết" : "Đủ dùng"}
@@ -67,9 +85,7 @@ export default function statictics() {
         </div>
       </div>
 
-
-
-      <div className=" w-full flex gap-5 flex-col max-h-467" >
+      <div className=" w-full flex gap-5 flex-col max-h-467">
         <div className="flex h-2/3 gap-5 w-full">
           {/* Doanh thu theo tháng */}
           <div className="bg-white p-4 rounded-2xl shadow-md w-3/4">
@@ -78,7 +94,8 @@ export default function statictics() {
             </h2>
             <div className="flex flex-col justify-between h-4/5">
               {/* Danh sách ngày + giá */}
-              <ul className="
+              <ul
+                className="
               space-y-1 overflow-y-auto        
               max-h-[40vh]    /* mobile */
               sm:max-h-[50vh] /* >=640px */
@@ -87,17 +104,28 @@ export default function statictics() {
               xl:max-h-[150px] /* >=1280px */
               2xl:max-h-[191.75px]"
               >
-                {Array.from({ length: 20 }, (_, i) => (
-                  <li className="flex font-bold text-2xl text-mainBlue justify-between">
-                    <span>17/8</span>
-                    <span>18.000.000 VND</span>
-                  </li>
-                ))}
+                {revenue
+
+                  .sort((a, b) => new Date(b.NgayXuat) - new Date(a.NgayXuat))
+
+                  .map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex font-bold text-2xl text-mainBlue justify-between"
+                    >
+                      <span>
+                        {new Date(item.NgayXuat).toLocaleDateString("vi-VN")}
+                      </span>
+                      <span>
+                        {Number(item.TongTien).toLocaleString("vi-VN")} VND
+                      </span>
+                    </li>
+                  ))}
               </ul>
 
               {/* Tổng */}
               <p className="mt-2 text-left font-bold text-2xl text-mainBlue">
-                Tổng: 18.000.000 VND
+                Tổng: {totalProfit.toLocaleString("vi-VN")} VNĐ
               </p>
             </div>
           </div>

@@ -22,6 +22,11 @@ exports.getNextInvoiceId = (callback) => {
   });
 };
 
+exports.getInvoicesByMonth = (month, year, callback) => {
+  invoiceModel.getInvoicesByMonth(month,year,callback)
+}
+
+
 exports.addInvoice = (data, callback) => {
   invoiceModel.addInvoice(data, (err, result) => {
     if (err) return callback(err);

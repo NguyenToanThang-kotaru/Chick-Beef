@@ -26,6 +26,18 @@ exports.getNextInvoiceId = (req, res) => {
   });
 };
 
+exports.getInvoicesByMonth = (req, res) => {
+  const { month, year } = req.params;
+
+  invoiceService.getInvoicesByMonth(month, year, (err, invoices) => {
+    if (err) {
+      console.error("Lỗi khi lấy hóa đơn theo tháng:", err);
+      return res.status(500).json({ error: "Lỗi server" });
+    }
+    res.json(invoices);
+  });
+};
+
 exports.addInvoice = (req, res) => {
   const invoiceData = req.body;
 

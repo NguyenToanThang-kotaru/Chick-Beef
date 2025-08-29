@@ -4,6 +4,7 @@ import axios from "axios";
 const axiosClient = axios.create({
   baseURL: "http://localhost:3700/api",
   headers: { "Content-Type": "application/json" },
+  withCredentials: true,
 });
 
 // interceptor: thêm accessToken vào mỗi request
@@ -22,21 +23,12 @@ axiosClient.interceptors.response.use(
     const originalRequest = error.config;
 
     // nếu token hết hạn và chưa thử refresh lần nào
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.response?.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true; // tránh lặp vô hạn
-
-      const refreshToken = sessionStorage.getItem("refreshToken");
-      if (!refreshToken) {
-        sessionStorage.clear();
-        window.location.href = "/login";
-        return Promise.reject(error);
-      }
-
+      console.log("loadrftoke...")
       try {
-        const res = await axios.post("http://localhost:3700/api/auth/refresh", {
-          token: refreshToken,
-        });
-
+        const res = await axios.post("http://localhost:3700/api/auth/refresh", {},{ withCredentials: true } );
+        console.log("thanh cong")
         const newAccessToken = res.data.accessToken;
         sessionStorage.setItem("accessToken", newAccessToken);
 
@@ -44,8 +36,8 @@ axiosClient.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return axiosClient(originalRequest);
       } catch (err) {
+        console.log(err)
         sessionStorage.clear();
-        window.location.href = "/login";
         return Promise.reject(err);
       }
     }
