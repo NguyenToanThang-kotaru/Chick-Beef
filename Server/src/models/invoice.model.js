@@ -20,9 +20,9 @@ exports.getLastInvoiceId = (callback) => {
 };
 
 exports.addInvoice = (data, callback) => {
-  const {MaHD, MaNV, MaKH, TongTien, NgayXuat, MaBan} = data;
-  const sql = "INSERT INTO hoadon (MaHD, MaNV, MaKH, TongTien, NgayXuat, MaBan) VALUES (?, ?, ?, ?, ?, ?)";
-  db.query(sql, [MaHD, MaNV, MaKH, TongTien, NgayXuat, MaBan], (err, result) => {
+  const {MaHD, MaNV, MaKH, TongTien, NgayXuat} = data;
+  const sql = "INSERT INTO hoadon (MaHD, MaNV, MaKH, TongTien, NgayXuat) VALUES (?, ?, ?, ?, ?)";
+  db.query(sql, [MaHD, MaNV, MaKH, TongTien, NgayXuat], (err, result) => {
     if (err) return callback(err);
     callback(null, result);
   });
