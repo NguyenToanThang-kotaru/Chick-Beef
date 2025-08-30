@@ -8,6 +8,10 @@ exports.getInvoiceById = (id, callback) => {
   invoiceModel.getInvoiceById(id, callback);
 };
 
+exports.getInvoiceStay = (callback) => {
+  invoiceModel.getInvoiceStay(callback);
+}
+
 
 exports.getNextInvoiceId = (callback) => {
   invoiceModel.getLastInvoiceId((err, lastId) => {
@@ -26,6 +30,9 @@ exports.getInvoicesByMonth = (month, year, callback) => {
   invoiceModel.getInvoicesByMonth(month,year,callback)
 }
 
+exports.getInvoiceTakeAway = (callback) => {
+  invoiceModel.getInvoiceTakeAway(callback)
+}
 
 exports.addInvoice = (data, callback) => {
   invoiceModel.addInvoice(data, (err, result) => {

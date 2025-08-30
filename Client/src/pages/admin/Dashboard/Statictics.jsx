@@ -1,11 +1,15 @@
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import "../../../../src/index.css";
 import axiosClient from "../../../middleware/axiosClient";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 
 export default function Statistics() {
   const [ingredients, setIngredients] = useState([]);
   const [revenue, setRevenue] = useState([]);
+  const [stay, setStay] = useState(0); // số khách tại quán
+  const [takeAway, setTakeAway] = useState(0); // số khách mang về
+  const [products, setProducts] = useState([]); 
+
   let totalProfit = 0;
 
   // Lấy danh sách nguyên liệu
@@ -36,20 +40,57 @@ export default function Statistics() {
     };
     fetchRevenueInMonth();
   }, []); // chỉ gọi 1 lần khi mount
-  
-    for (const item of revenue) {
-      totalProfit += Number(item.TongTien);
+
+  for (const item of revenue) {
+    totalProfit += Number(item.TongTien);
+  }
+
+  // Dữ liệu biểu đồ tỉ lệ
+  useEffect(() => {
+    const fetchTakeAway = async () => {
+      try {
+        const res = await axiosClient.get("/invoice/takeaway");
+        setTakeAway(res.data.length);
+      } catch (err) {
+        console.error("Lỗi khi lấy số lượng khách mang về:", err);
+      }
     }
+    const fetchStay = async () => {
+      try {
+        const res = await axiosClient.get("/invoice/stay");
+        setStay(res.data.length);
+      } catch (err) {
+        console.error("Lỗi khi lấy số lượng khách tại quán:", err);
+      }
+    }
+    fetchTakeAway();
+    fetchStay();
+  });
+
+  // Lấy top 5 món bán chạy nhất
+  useEffect(() => {
+    const fetchTopProducts = async () => {
+      try {
+        const res = await axiosClient.get("/product/count");
+        setProducts(res.data.slice(0, 5)); // Lấy 5 món bán chạy nhất
+        console.log("Top món bán chạy:", res.data);
+      } catch (err) {
+        console.error("Lỗi khi lấy top món bán chạy:", err);
+      }
+    };
+    fetchTopProducts();
+  }, [])
+
   const data = [
-    { name: "Mang về", value: 60 },
-    { name: "Tại quán", value: 40 },
+    { name: "Mang về", value: takeAway },
+    { name: "Tại quán", value: stay },
   ];
   const COLORS = ["#FACC15", "#22C55E"]; // vàng và xanh lá
 
   return (
     <div className="w-full h-full flex gap-5 ">
       {/* Trạng thái tồn kho */}
-      <div className="bg-white p-4 h-full w-2/7 rounded-2xl shadow-md flex flex-col">
+      <div className="bg-white p-4 min-h-full w-2/7 rounded-2xl shadow-md flex flex-col">
         <h2 className="font-bold mb-5 text-mainBlue">Trạng Thái Tồn Kho</h2>
 
         <div
@@ -167,17 +208,18 @@ export default function Statistics() {
           </div>
         </div>
 
-        {/* Top 5 món bán chạy */}
+        {/* Top  món bán chạy */}
         <div className="bg-white flex-1 p-4 rounded-2xl shadow-md ">
           <h2 className="font-bold mb-2 text-2xl text-mainBlue w-full border-b-4 border-b-mainBlue">
-            Top 5 Món Bán Chạy
+            Top Món Bán Chạy
           </h2>
-          <ul className="space-y-1">
-            <li>Món 1: 55</li>
-            <li>Món 2: 40</li>
-            <li>Món 3: 32</li>
-            <li>Món 4: 19</li>
-            <li>Món 5: 9</li>
+          <ul className="space-y-1 overflow-y-scroll max-h-2/3">
+            {products.map((item, i) => (
+              <li key={item.MaSP || i }className="flex font-bold text-l  justify-between">
+                <span>{item.TenSP}</span>
+                <span>{Number(item.TongSoLuong).toLocaleString("vi-VN")}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

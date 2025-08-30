@@ -9,12 +9,19 @@ exports.getAllInvoice = (req, res) => {
   });
 };
 
+exports.getInvoiceStay = (req, res) => {
+  invoiceService.getInvoiceStay((err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(results);
+  });
+}
+
 exports.getInvoiceById = (req, res) => {
   const id = req.params.id;
 
   invoiceService.getInvoiceById(id, (err, result) => {
     if (err) return res.status(500).json({ error: err });
-    if (!result) return res.status(404).json({ message: "Không tìm thấy hóa đơn" });
+    if (!result) return res.status(404).json({ message: "Không tìm thấy hóa đơnnnn" });
     res.json(result);
   });
 };
@@ -37,6 +44,13 @@ exports.getInvoicesByMonth = (req, res) => {
     res.json(invoices);
   });
 };
+
+exports.getInvoiceTakeAway = (req, res) => {
+  invoiceService.getInvoiceTakeAway((err, results) => {
+    if (err) return res.status(500).json({ error: "Lỗi sever" });
+    res.json(results);
+  });
+}
 
 exports.addInvoice = (req, res) => {
   const invoiceData = req.body;

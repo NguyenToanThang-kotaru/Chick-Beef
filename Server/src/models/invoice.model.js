@@ -4,6 +4,14 @@ exports.getAllInvoices = (callback) => {
   db.query('SELECT * FROM hoadon', callback);
 };
 
+exports.getInvoiceStay = (callback) => {
+  const sql = "SELECT * FROM hoadon AS t1 LEFT JOIN hoadonban AS t2 ON t1.MaHD = t2.MaHD WHERE NOT(t2.MaBan is NULL)";
+  db.query(sql, (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+}
+
 exports.getInvoiceById = (id, callback) => {
   db.query('SELECT * FROM hoadon WHERE MaHD = ?', [id], (err, results) => {
     if (err) return callback(err);
@@ -27,6 +35,14 @@ exports.addInvoice = (data, callback) => {
     callback(null, result);
   });
 };
+
+exports.getInvoiceTakeAway = (callback) => {
+  const sql = "SELECT * FROM hoadon AS t1 LEFT JOIN hoadonban AS t2 ON t1.MaHD = t2.MaHD WHERE t2.MaBan is NULL";
+  db.query(sql, (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+}
 
 // Lấy hóa đơn theo tháng và năm
 exports.getInvoicesByMonth = (month, year, callback) => {

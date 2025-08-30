@@ -11,6 +11,7 @@ const ingredientRoutes = require('./src/routes/ingredient.routes')
 const invoiceRoutes = require('./src/routes/invoice.routes')
 const employeeRoutes = require('./src/routes/employee.routes')
 const roleRoutes = require('./src/routes/role.routes')
+const productRoutes = require('./src/routes/product.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -34,6 +35,8 @@ app.use('/api/invoice', invoiceRoutes)
 app.use('/api/employee', employeeRoutes)
 
 app.use('/api/role', roleRoutes)
+
+app.use('/api/product', productRoutes)
 
 // start server
 const PORT = 3700;
