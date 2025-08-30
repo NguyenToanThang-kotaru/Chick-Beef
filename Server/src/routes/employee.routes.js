@@ -9,6 +9,9 @@ router.get('/nextid', authenticateToken.authenticateToken, employeeController.ge
 // GET /api/employee
 router.get('/', authenticateToken.authenticateToken, employeeController.getAllEmployees);
 
+// GET /api/employee/search?keyword=abc
+router.get('/search', authenticateToken.authenticateToken, employeeController.searchEmployee);
+
 // GET /api/employee/:id
 router.get('/:id', authenticateToken.authenticateToken, employeeController.getEmployeeById);
 

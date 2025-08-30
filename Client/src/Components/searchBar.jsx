@@ -16,7 +16,7 @@ export default function SearchBar({ placeholder = "Tìm kiếm...", onSearch }) 
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      alert.log("Searching for:", query);
+      console.log("Searching for:", query);
       handleSearch();
     }
   };

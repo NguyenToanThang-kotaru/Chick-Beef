@@ -9,6 +9,10 @@ exports.getEmployeeById = (id, callback) => {
   employeeModel.getEmployeeById(id, callback);
 };
 
+exports.searchEmployee = (keyword, callback) => {
+  employeeModel.searchEmployee(keyword, callback);
+};
+
 
 exports.getNextEmployeeId = (callback) => {
   employeeModel.getLastEmployeeId((err, lastId) => {
@@ -28,74 +32,62 @@ exports.addEmployee = (data, callback) => {
 
   // Kiểm tra dữ liệu trống
   if (!TenNV || !SDT || !DiaChi) {
-    return callback({ message: "Vui lòng nhập đầy đủ thông tin" });
+    return callback({ status: 400, message: "Vui lòng nhập đầy đủ thông tin" });
   }
 
-  // Validate
-  let error = validateName(TenNV) || validatePhone(SDT) || validateAddress(DiaChi);
+  // Validate dữ liệu
+  const error = validateName(TenNV) || validatePhone(SDT) || validateAddress(DiaChi);
   if (error) {
-    return callback({ message: error });
+    return callback({ status: 400, message: error });
   }
 
-  // Check trùng số điện thoại
+  // Kiểm tra số điện thoại trùng
   employeeModel.checkPhoneExists(SDT, (err, exists) => {
-    if (err) return callback(err);
+    if (err) return callback({ status: 500, message: "Lỗi cơ sở dữ liệu" });
     if (exists) {
-      return callback({ message: "Số điện thoại đã tồn tại" });
+      return callback({ status: 400, message: "Số điện thoại đã tồn tại" });
     }
 
-    // Insert vào DB
-    const employeeData = {
-      MaNV,
-      TenNV,
-      DiaChi,
-      SDT,
-      MaVT,
-      IsDeleted: 0
-    };
-
+    // 4. Thêm nhân viên vào DB
+    const employeeData = { MaNV, TenNV, DiaChi, SDT, MaVT };
     employeeModel.addEmployee(employeeData, (err, result) => {
-      if (err) return callback(err);
-      callback(null, {
-        success: true,
-        message: "Thêm nhân viên thành công",
-        data: employeeData
-      });
+      if (err) return callback({ status: 500, message: err.message });
+      callback(null, employeeData); // trả dữ liệu nhân viên mới
     });
   });
 };
+
 
 exports.updateEmployee = (id, data, callback) => {
   const { TenNV, DiaChi, SDT, MaVT } = data;
 
   // Kiểm tra dữ liệu trống
   if (!TenNV || !SDT || !DiaChi) {
-    return callback({ message: "Vui lòng nhập đầy đủ thông tin" });
+    return callback({ status: 400, message: "Vui lòng nhập đầy đủ thông tin" });
   }
 
-  // Validate
-  let error = validateName(TenNV) || validatePhone(SDT) || validateAddress(DiaChi);
+  // Validate dữ liệu
+  const error = validateName(TenNV) || validatePhone(SDT) || validateAddress(DiaChi);
   if (error) {
-    return callback({ message: error });
+    return callback({ status: 400, message: error });
   }
 
   // Kiểm tra số điện thoại trùng (trừ chính nhân viên đó)
   employeeModel.checkPhoneExistsForUpdate(SDT, id, (err, exists) => {
-    if (err) return callback(err);
+    if (err) return callback({ status: 500, message: "Lỗi cơ sở dữ liệu" });
     if (exists) {
-      return callback({ message: "Số điện thoại đã tồn tại" });
+      return callback({ status: 400, message: "Số điện thoại đã tồn tại" });
     }
 
-    // Dữ liệu update
+    //  Dữ liệu update
     const employeeData = { TenNV, DiaChi, SDT, MaVT };
-
     employeeModel.updateEmployee(id, employeeData, (err, result) => {
-      if (err) return callback(err);
+      if (err) return callback({ status: 500, message: err.message });
       if (result.affectedRows === 0) {
-        return callback(null, null); // Không tìm thấy nhân viên
+        return callback({ status: 404, message: "Không tìm thấy nhân viên" });
       }
       callback(null, {
-        success: true,
+        status: 200,
         message: "Cập nhật nhân viên thành công",
         data: { MaNV: id, ...employeeData }
       });

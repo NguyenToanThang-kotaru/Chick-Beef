@@ -11,9 +11,29 @@ exports.getEmployeeById = (id, callback) => {
   })
 };
 
+exports.searchEmployee = (keyword, callback) => {
+  const sql = `
+    SELECT * FROM nhanvien 
+    WHERE IsDeleted = 0
+      AND (
+        MaNV LIKE ? 
+        OR TenNV LIKE ? 
+        OR DiaChi LIKE ? 
+        OR SDT LIKE ?
+        OR MaVT LIKE ?
+      )
+  `;
+  const likeKeyword = `%${keyword}%`;
+  db.query(sql, [likeKeyword, likeKeyword, likeKeyword, likeKeyword, likeKeyword], (err, results) => {
+    if (err) return callback(err);
+    callback(null, results);
+  });
+};
+
+
 // Lấy mã cuối cùng
 exports.getLastEmployeeId = (callback) => {
-  db.query("SELECT MaNV FROM nhanvien WHERE IsDeleted = 0 ORDER BY MaNV DESC LIMIT 1", (err, results) => {
+  db.query("SELECT MaNV FROM nhanvien ORDER BY MaNV DESC LIMIT 1", (err, results) => {
     if (err) return callback(err);
     callback(null, results.length > 0 ? results[0].MaNV : null);
   });
@@ -22,9 +42,9 @@ exports.getLastEmployeeId = (callback) => {
 
 // Thêm
 exports.addEmployee = (data, callback) => {
-  const {MaNV, TenNV, DiaChi, SDT, MaVT, IsDeleted} = data;
-  const sql = "INSERT INTO nhanvien (MaNV, TenNV, DiaChi, SDT, MaVT, IsDeleted) VALUES (?, ?, ?, ?, ?, ?)";
-  db.query(sql, [MaNV, TenNV, DiaChi, SDT, MaVT, IsDeleted], (err, result) => {
+  const {MaNV, TenNV, DiaChi, SDT, MaVT} = data;
+  const sql = "INSERT INTO nhanvien (MaNV, TenNV, DiaChi, SDT, MaVT) VALUES (?, ?, ?, ?, ?)";
+  db.query(sql, [MaNV, TenNV, DiaChi, SDT, MaVT], (err, result) => {
     if (err) return callback(err);
     callback(null, result);
   });
