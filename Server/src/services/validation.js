@@ -28,11 +28,11 @@ function validatePrice(price) {
   return null;
 }
 
-// Validate số >= 0
+// Validate số > 0
 function validateNumber(key, number) {
   const num = Number(number);
-  if (isNaN(num) || num < 0) 
-    return key + " chỉ được chứa số";
+  if (isNaN(num) || num <= 0) 
+    return key + " chỉ được chứa số dương";
   return null;
 }
 

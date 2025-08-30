@@ -39,6 +39,13 @@ exports.getLastTableId = (callback) => {
   });
 };
 
+// Lấy số bàn cuối cùng
+exports.getLastNumberTable = (callback) => {
+  db.query("SELECT SoBan FROM ban ORDER BY SoBan DESC LIMIT 1", (err, results) => {
+    if (err) return callback(err);
+    callback(null, results.length > 0 ? results[0].SoBan : null);
+  });
+};
 
 // Thêm
 exports.addTable = (data, callback) => {

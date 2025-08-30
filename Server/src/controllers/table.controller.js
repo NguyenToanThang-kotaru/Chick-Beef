@@ -34,6 +34,13 @@ exports.getNextTableId = (req, res) => {
   });
 };
 
+exports.getNextNumberTable = (req, res) => {
+  tableService.getNextNumberTable((err, nextNumberTable) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json({ nextNumberTable });
+  });
+};
+
 exports.addTable = (req, res) => {
   const tableData = req.body;
 

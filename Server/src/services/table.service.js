@@ -27,6 +27,19 @@ exports.getNextTableId = (callback) => {
   });
 };
 
+exports.getNextNumberTable = (callback) => {
+  tableModel.getLastNumberTable((err, lastNumberTable) => {
+    if (err) return callback(err);
+
+    let newId = "1";
+    if (lastNumberTable) {
+      const num = parseInt(lastNumberTable) + 1;
+      newId = num.toString();
+    }
+    callback(null, newId);
+  });
+};
+
 exports.addTable = (data, callback) => {
   const { MaBan, SoBan, SucChua, ThoiGianGiuBan, TrangThai } = data;
 
