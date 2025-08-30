@@ -10,8 +10,6 @@ import { toast } from "react-toastify";
 import ConfirmDialog from "../../../Components/dialog/confirmDialog";
 
 export default function Products() {
-
-
   const [showAddForm, setShowAddForm] = useState(false);
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -30,9 +28,9 @@ export default function Products() {
         toast.error("Xóa sản phẩm thất bại");
       }
       // console.log("Xóa sản phẩm:", product);
-    }; deleteProduct();
+    };
+    deleteProduct();
   };
-
 
   const handleSearch = (value) => {
     const fetchSearchedProducts = async () => {
@@ -43,10 +41,30 @@ export default function Products() {
       } catch (err) {
         console.error("Lỗi khi tìm kiếm sản phẩm:", err);
       }
-    }
+    };
     fetchSearchedProducts();
-  }
+  };
 
+  const handleAddProduct = async (product) => {
+    try {
+      await axios.post("http://localhost:5000/api/products", product);
+      alert("Thêm sản phẩm thành công!");
+    } catch (err) {
+      console.error("Lỗi khi thêm:", err);
+    }
+  };
+
+  const handleUpdateProduct = async (product) => {
+    try {
+      await axios.put(
+        `http://localhost:5000/api/products/${product.MaSP}`,
+        product
+      );
+      alert("Sửa sản phẩm thành công!");
+    } catch (err) {
+      console.error("Lỗi khi sửa:", err);
+    }
+  };
   // Lấy danh sách sản phẩm
 
   useEffect(() => {
@@ -64,15 +82,34 @@ export default function Products() {
     // Ví dụ:
     // fetchProducts().then(data => setProducts(data));
   }, []);
-
   if (showAddForm) {
-    return <AddOrEditProduct onBack={() => setShowAddForm(false)} />;
+    return (
+      <AddOrEditProduct
+        data={selectedProduct} // \ truyền data khi sửa
+        onBack={() => {
+          setShowAddForm(false);
+          setSelectedProduct(null); // clear lại khi đóng form
+        }}
+        onAdd={(newProduct) => {
+          setProducts((prev) => [...prev, newProduct]); // khi thêm mới
+          setShowAddForm(false);
+        }}
+        onUpdate={(updatedProduct) => {
+          setProducts((prev) =>
+            prev.map((p) =>
+              p.MaSP === updatedProduct.MaSP ? updatedProduct : p
+            )
+          ); // khi sửa thì cập nhật lại state
+          setShowAddForm(false);
+          setSelectedProduct(null);
+        }}
+      />
+    );
   }
   const data = { products };
   console.log(data);
 
   return (
-
     <div className="h-full flex flex-col">
       <ConfirmDialog
         open={openConfirm}
@@ -92,18 +129,45 @@ export default function Products() {
       </div>
 
       <div className="bg-[#FFF8F0] m-5 rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] flex-1 overflow-y-auto scrollbar-hide">
-        <Table className=""
-          data={products.map((item, index) => (
-            {
-              Id: index + 1,
-              Image: <img src={'../src/assets/' + item.AnhSP} alt="eye" className="w-20 h-20 cursor-pointer" />,
-              Name: item.TenSP,
-              Price: Number(item.GiaSP).toLocaleString('vi-VN') + " VND",
-              watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" />,
-              edit: <img src={edit} alt="eye" className="w-6 h-6 cursor-pointer" onClick={()=>{setSelectedProduct(item);}}/>,
-              delete: <img src={deleteIcon} alt="eye" className="w-6 h-6 cursor-pointer" onClick={() => { setOpenConfirm(true); setSelectedProduct(item) }} />
-            }
-          ))}
+        <Table
+          className=""
+          data={products.map((item, index) => ({
+            Id: index + 1,
+            Image: (
+              <img
+                src={"../src/assets/food/" + item.AnhSP}
+                alt="eye"
+                className="w-20 h-20 cursor-pointer"
+              />
+            ),
+            Name: item.TenSP,
+            Price: Number(item.GiaSP).toLocaleString("vi-VN") + " VND",
+            watch: (
+              <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" />
+            ),
+            edit: (
+              <img
+                src={edit}
+                alt="eye"
+                className="w-6 h-6 cursor-pointer"
+                onClick={() => {
+                  setSelectedProduct(item);
+                  setShowAddForm(true);
+                }}
+              />
+            ),
+            delete: (
+              <img
+                src={deleteIcon}
+                alt="eye"
+                className="w-6 h-6 cursor-pointer"
+                onClick={() => {
+                  setOpenConfirm(true);
+                  setSelectedProduct(item);
+                }}
+              />
+            ),
+          }))}
         />
       </div>
     </div>
