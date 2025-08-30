@@ -26,8 +26,17 @@ function validateAddress(address) {
   return null;
 }
 
+// Validate giá tiền
+function validatePrice(price) {
+  if (isNaN(price) || price <= 0) {
+    return "Giá sản phẩm phải là số dương";
+  }
+  return null;
+}
+
 module.exports = {
   validateName,
   validatePhone,
-  validateAddress
+  validateAddress,
+  validatePrice
 };

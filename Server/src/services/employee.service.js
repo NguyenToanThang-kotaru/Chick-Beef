@@ -48,7 +48,7 @@ exports.addEmployee = (data, callback) => {
       return callback({ status: 400, message: "Số điện thoại đã tồn tại" });
     }
 
-    // 4. Thêm nhân viên vào DB
+    // Thêm nhân viên vào DB
     const employeeData = { MaNV, TenNV, DiaChi, SDT, MaVT };
     employeeModel.addEmployee(employeeData, (err, result) => {
       if (err) return callback({ status: 500, message: err.message });
