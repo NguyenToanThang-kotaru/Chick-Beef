@@ -12,9 +12,6 @@ router.get('/', authenticateToken.authenticateToken, employeeController.getAllEm
 // GET /api/employee/search?keyword=abc
 router.get('/search', authenticateToken.authenticateToken, employeeController.searchEmployee);
 
-// GET /api/employee/:id
-router.get('/:id', authenticateToken.authenticateToken, employeeController.getEmployeeById);
-
 // POST /api/employee
 router.post('/', authenticateToken.authenticateToken, employeeController.addEmployee);
 
@@ -23,5 +20,8 @@ router.put('/update/:id', authenticateToken.authenticateToken, employeeControlle
 
 // PUT /api/employee/delete/:id
 router.put('/delete/:id', authenticateToken.authenticateToken, employeeController.deleteEmployee);
+
+// GET /api/employee/:id
+router.get('/:id', authenticateToken.authenticateToken, employeeController.getEmployeeById);
 
 module.exports = router;

@@ -41,6 +41,11 @@ exports.addEmployee = (data, callback) => {
     return callback({ status: 400, message: error });
   }
 
+  if(TenNV.length > 100)
+    return callback({ status: 400, message: "Tên nhân viên không được vượt quá 100 ký tự" });
+  if(DiaChi.length > 200)
+    return callback({ status: 400, message: "Địa chỉ không được vượt quá 200 ký tự" });
+
   // Kiểm tra số điện thoại trùng
   employeeModel.checkPhoneExists(SDT, (err, exists) => {
     if (err) return callback({ status: 500, message: "Lỗi cơ sở dữ liệu" });
