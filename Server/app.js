@@ -14,6 +14,10 @@ const roleRoutes = require('./src/routes/role.routes')
 const productRoutes = require('./src/routes/product.routes')
 const tableRoutes = require('./src/routes/table.routes')
 const recipeRoutes = require('./src/routes/recipe.routes')
+const customerRoutes = require('./src/routes/customer.routes')
+const supplierRoutes = require('./src/routes/supplier.routes')
+const importRoutes = require('./src/routes/import.routes')
+const paymentRoutes = require('./src/routes/payment.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -43,6 +47,14 @@ app.use('/api/product', productRoutes)
 app.use('/api/table', tableRoutes)
 
 app.use('/api/recipe', recipeRoutes)
+
+app.use('/api/customer', customerRoutes)
+
+app.use('/api/supplier', supplierRoutes)
+
+app.use('/api/import', importRoutes)
+
+app.use('/api/payment', paymentRoutes)
 
 // start server
 const PORT = 3700;

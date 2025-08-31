@@ -36,7 +36,7 @@ exports.addEmployee = (data, callback) => {
   }
 
   // Validate dữ liệu
-  const error = validateName(TenNV) || validatePhone(SDT) || validateAddress(DiaChi);
+  const error = validateName(TenNV) || validatePhone(SDT);
   if (error) {
     return callback({ status: 400, message: error });
   }

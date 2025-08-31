@@ -1,5 +1,5 @@
 const recipeModel = require('../models/recipe.model');
-const { validateNumber } = require("./validation");
+const { validatePositiveNumber } = require("./validation");
 
 exports.getAllRecipes = (callback) => {
   recipeModel.getAllRecipes(callback)
@@ -21,7 +21,7 @@ exports.addRecipe = (data, callback) => {
     return callback({ status: 400, message: "Vui lòng nhập đầy đủ thông tin" });
 
   // Validate dữ liệu
-  const error = validateNumber("Định lượng", DinhLuongNL);
+  const error = validatePositiveNumber("Định lượng", DinhLuongNL);
   if (error) 
     return callback({ status: 400, message: error });
 
@@ -42,7 +42,7 @@ exports.updateRecipe = (id, data, callback) => {
     return callback({ status: 400, message: "Vui lòng nhập đầy đủ thông tin" });
 
   // Validate dữ liệu
-  const error = validateNumber("Định lượng", DinhLuongNL);
+  const error = validatePositiveNumber("Định lượng", DinhLuongNL);
   if (error) 
     return callback({ status: 400, message: error });
 

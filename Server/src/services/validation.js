@@ -13,25 +13,26 @@ function validatePhone(phone) {
   return null;
 }
 
-// Validate địa chỉ
-function validateAddress(address) {
-  if (address.length > 200) 
-    return "Địa chỉ không được vượt quá 200 ký tự";
-  return null;
-}
-
 // Validate giá tiền
 function validatePrice(price) {
   const num = Number(price);
   if (isNaN(num) || num <= 0) 
-    return "Giá phải là số dương";
+    return "Số tiền phải là số dương";
+  return null;
+}
+
+// Validate số >= 0
+function validateNumber(key, number) {
+  const num = Number(number);
+  if (isNaN(num) || num <= 0) 
+    return key + " chỉ được chứa số không âm";
   return null;
 }
 
 // Validate số > 0
-function validateNumber(key, number) {
+function validatePositiveNumber(key, number) {
   const num = Number(number);
-  if (isNaN(num) || num <= 0) 
+  if (isNaN(num) || num < 0)
     return key + " chỉ được chứa số dương";
   return null;
 }
@@ -63,10 +64,10 @@ function validateDate(date) {
 module.exports = {
   validateName,
   validatePhone,
-  validateAddress,
   validatePrice,
   validateNumber,
   validateTime,
   validateDate,
-  validatePositiveInteger
+  validatePositiveInteger,
+  validatePositiveNumber
 };
