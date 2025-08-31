@@ -24,6 +24,8 @@ const catalogRoutes = require('./src/routes/catalog.routes')
 const storeRoutes = require('./src/routes/store.routes')
 const productCatalogRoutes = require('./src/routes/productCatalog.routes')
 const reserveTableRoutes = require('./src/routes/reserveTable.routes')
+const accountRoutes = require('./src/routes/account.routes')
+const invoiceDetailRoutes = require('./src/routes/invoiceDetail.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -73,6 +75,10 @@ app.use('/api/store', storeRoutes)
 app.use('/api/productCatalog', productCatalogRoutes)
 
 app.use('/api/reserveTable', reserveTableRoutes)
+
+app.use('/api/account', accountRoutes)
+
+app.use('/api/invoiceDetail', invoiceDetailRoutes)
 
 // start server
 const PORT = 3700;
