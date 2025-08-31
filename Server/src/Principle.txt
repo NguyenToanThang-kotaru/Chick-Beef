@@ -1,7 +1,13 @@
 Route: Chia cổng để xác định API cần làm gì
 
-Controller: nhận request, gọi service, trả respons
+Controller: nhận request, gọi service, trả respons, Kiểm tra dữ liệu từ request (input validation)
+    MaQuyen, TenQuyen có tồn tại không.
+    TenQuyen không được rỗng
+    Kiểu dữ liệu đúng không (string, number, date…)
 
-Service: làm trung gian, có thể thêm logic (validate, xử lý data).
+Service: làm trung gian, Kiểm tra logic nghiệp vụ (business validation)
+    MaQuyen có bị trùng kh
+    Không cho phép xóa quyền mặc định (admin)
+    Chỉ update nếu quyền chưa bị xóa IsDeleted = 0
 
 Model: thao tác database (db.query).

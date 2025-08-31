@@ -26,8 +26,20 @@ function validateAddress(address) {
   return null;
 }
 
+function validateEntityName(name, field) {
+  const nameRegex = /^[\p{L}\s]+$/u;   
+  if (!nameRegex.test(name)) {
+    return `Tên ${field} chỉ được chứa chữ cái và khoảng trắng`;
+  }
+  if (name.length > 100) {
+    return `Tên ${field} không được vượt quá 100 ký tự`;
+  }
+  return null;
+}
+
 module.exports = {
   validateName,
   validatePhone,
-  validateAddress
+  validateAddress,
+  validateEntityName
 };
