@@ -18,6 +18,9 @@ const customerRoutes = require('./src/routes/customer.routes')
 const supplierRoutes = require('./src/routes/supplier.routes')
 const importRoutes = require('./src/routes/import.routes')
 const paymentRoutes = require('./src/routes/payment.routes')
+const supplierDetailRoutes = require('./src/routes/supplierDetail.routes')
+const importDetailRoutes = require('./src/routes/importDetail.routes')
+const catalogRoutes = require('./src/routes/catalog.routes')
 
 const app = express();
 app.use(bodyParser.json());
@@ -55,6 +58,12 @@ app.use('/api/supplier', supplierRoutes)
 app.use('/api/import', importRoutes)
 
 app.use('/api/payment', paymentRoutes)
+
+app.use('/api/supplierDetail', supplierDetailRoutes)
+
+app.use('/api/importDetail', importDetailRoutes)
+
+app.use('/api/catalog', catalogRoutes)
 
 // start server
 const PORT = 3700;
