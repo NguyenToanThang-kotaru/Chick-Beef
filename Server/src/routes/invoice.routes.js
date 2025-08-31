@@ -26,4 +26,7 @@ router.get('/month/:year/:month', authenticateToken.authenticateToken,invoiceCon
 // POST /api/invoice
 router.post('/', authenticateToken.authenticateToken, invoiceController.addInvoice);
 
+// PUT /api/invoice/update/:id
+router.put('/update/:id', authenticateToken.authenticateToken, invoiceController.updateStatusInvoice);
+
 module.exports = router;

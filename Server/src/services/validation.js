@@ -24,7 +24,7 @@ function validatePrice(price) {
 // Validate số >= 0
 function validateNumber(key, number) {
   const num = Number(number);
-  if (isNaN(num) || num <= 0) 
+  if (isNaN(num) || num < 0) 
     return key + " chỉ được chứa số không âm";
   return null;
 }
@@ -45,19 +45,48 @@ function validatePositiveInteger(key, number) {
   return null;
 }
 
-// Validate time (YYYY-MM-DD HH:MM:SS)
-function validateTime(time) {
-  const timeRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/;
-  if (!timeRegex.test(time)) 
-    return "Thời gian không hợp lệ";
+// Validate date (YYYY-MM-DD)
+function validateDate(date) {
+  const dateRegex = /^(\d{4})-(\d{2})-(\d{2})$/;
+  const match = date.match(dateRegex);
+  if (!match) return "Ngày không hợp lệ";
+
+  const year = parseInt(match[1], 10);
+  const month = parseInt(match[2], 10);
+  const day = parseInt(match[3], 10);
+
+  // Check month hợp lệ
+  if (month < 1 || month > 12) return "Tháng không hợp lệ";
+
+  // Ngày tối đa theo tháng
+  const daysInMonth = new Date(year, month, 0).getDate(); // 0 nghĩa là ngày cuối của tháng trước
+  if (day < 1 || day > daysInMonth) return "Ngày không hợp lệ";
+
   return null;
 }
 
-// Validate date (YYYY-MM-DD)
-function validateDate(date) {
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
-  if (!dateRegex.test(date))
-    return "Ngày không hợp lệ";
+// Validate time (YYYY-MM-DD HH:MM:SS)
+function validateTime(time) {
+  const timeRegex = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/;
+  const match = time.match(timeRegex);
+  if (!match) return "Thời gian không hợp lệ";
+
+  const year = parseInt(match[1], 10);
+  const month = parseInt(match[2], 10);
+  const day = parseInt(match[3], 10);
+  const hour = parseInt(match[4], 10);
+  const minute = parseInt(match[5], 10);
+  const second = parseInt(match[6], 10);
+
+  // Check ngày hợp lệ (dùng lại validateDate)
+  const dateError = validateDate(`${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`);
+  if (dateError) return dateError;
+
+  // Check giờ phút giây
+  if (hour < 0 || hour > 23) return "Giờ không hợp lệ";
+  if (minute < 0 || minute > 59) return "Phút không hợp lệ";
+  if (second < 0 || second > 59) return "Giây không hợp lệ";
+
   return null;
 }
 

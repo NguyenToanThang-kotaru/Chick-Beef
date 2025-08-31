@@ -40,3 +40,24 @@ exports.addInvoice = (data, callback) => {
     callback(null, { ...data});
   });
 };
+
+exports.updateStatusInvoice = (id, data, callback) => {
+  const { TrangThai } = data;
+
+  // Kiểm tra dữ liệu trống
+  if (!TrangThai) 
+    return callback({ status: 400, message: "Vui lòng nhập đầy đủ thông tin" });
+  //  Dữ liệu update
+  const statusData = { TrangThai };
+  invoiceModel.updateStatusInvoice(id, statusData, (err, result) => {
+    if (err) return callback({ status: 500, message: err.message });
+    if (result.affectedRows === 0) {
+      return callback({ status: 404, message: "Không tìm thấy hóa đơn" });
+    }
+    callback(null, {
+      status: 200,
+      message: "Cập nhật hóa đơn thành công",
+      data: { MaHD: id, ...statusData }
+    });
+  });
+};

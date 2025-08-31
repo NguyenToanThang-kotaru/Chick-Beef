@@ -36,6 +36,11 @@ exports.addInvoice = (data, callback) => {
   });
 };
 
+// Cập nhật trạng thái
+exports.updateStatusInvoice = (id, data, callback) => {
+  db.query("UPDATE hoadon SET ? WHERE MaHD = ?", [data, id], callback);
+};
+
 exports.getInvoiceTakeAway = (callback) => {
   const sql = "SELECT * FROM hoadon AS t1 LEFT JOIN hoadonban AS t2 ON t1.MaHD = t2.MaHD WHERE t2.MaBan is NULL";
   db.query(sql, (err, results) => {
