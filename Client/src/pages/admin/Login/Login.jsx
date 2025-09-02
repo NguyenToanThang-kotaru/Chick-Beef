@@ -69,7 +69,6 @@ const handleLogin = async () => {
 
         <div className="w-full text-center mt-5">
           <button
-            
             onClick={handleLogin}
             className="bg-mainRed rounded-xl w-3/5 text-4xl text-white p-5 font-bold shadow-md transition duration-300 ease-in-out hover:bg-[#b12a2a] hover:shadow-xl hover:scale-105 active:scale-95 active:bg-[#a02222] active:shadow-inner"
           >

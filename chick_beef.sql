@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 30, 2025 lúc 01:50 PM
+-- Thời gian đã tạo: Th8 31, 2025 lúc 11:07 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -55,6 +55,7 @@ CREATE TABLE `chitiethd` (
   `MaHD` varchar(10) NOT NULL,
   `MaSP` varchar(10) NOT NULL,
   `SoLuongSP` varchar(5) NOT NULL,
+  `DonGia` varchar(15) NOT NULL,
   `ThanhTien` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -62,19 +63,19 @@ CREATE TABLE `chitiethd` (
 -- Đang đổ dữ liệu cho bảng `chitiethd`
 --
 
-INSERT INTO `chitiethd` (`MaHD`, `MaSP`, `SoLuongSP`, `ThanhTien`) VALUES
-('HD00001', 'SP00001', '2', '90000'),
-('HD00001', 'SP00004', '1', '20000'),
-('HD00001', 'SP00003', '1', '35000'),
-('HD00002', 'SP00002', '1', '48000'),
-('HD00002', 'SP00004', '1', '20000'),
-('HD00003', 'SP00002', '2', '96000'),
-('HD00003', 'SP00005', '1', '45000'),
-('HD00004', 'SP00001', '1', '45000'),
-('HD00004', 'SP00003', '2', '70000'),
-('HD00004', 'SP00004', '1', '20000'),
-('HD00005', 'SP00002', '3', '144000'),
-('HD00005', 'SP00005', '2', '90000');
+INSERT INTO `chitiethd` (`MaHD`, `MaSP`, `SoLuongSP`, `DonGia`, `ThanhTien`) VALUES
+('HD00001', 'SP00001', '2', '45000', '90000'),
+('HD00001', 'SP00004', '1', '10000', '20000'),
+('HD00001', 'SP00003', '1', '35000', '35000'),
+('HD00002', 'SP00002', '1', '48000', '48000'),
+('HD00002', 'SP00004', '1', '20000', '20000'),
+('HD00003', 'SP00002', '2', '48000', '96000'),
+('HD00003', 'SP00005', '1', '45000', '45000'),
+('HD00004', 'SP00001', '1', '45000', '45000'),
+('HD00004', 'SP00003', '2', '35000', '70000'),
+('HD00004', 'SP00004', '1', '20000', '20000'),
+('HD00005', 'SP00002', '3', '48000', '144000'),
+('HD00005', 'SP00005', '2', '45000', '90000');
 
 -- --------------------------------------------------------
 
@@ -240,7 +241,8 @@ INSERT INTO `danhmucsanpham` (`MaSP`, `MaLDM`) VALUES
 ('SP00004', 'LDM00002'),
 ('SP00005', 'LDM00002'),
 ('SP00006', 'LDM00003'),
-('SP00007', 'LDM00004');
+('SP00007', 'LDM00004'),
+('SP00008', 'LDM00001');
 
 -- --------------------------------------------------------
 
@@ -252,8 +254,16 @@ CREATE TABLE `datban` (
   `MaDB` varchar(10) NOT NULL,
   `MaBan` varchar(10) NOT NULL,
   `ThoiGian` varchar(20) NOT NULL,
-  `MaKH` varchar(10) NOT NULL
+  `MaKH` varchar(10) NOT NULL,
+  `IsDeleted` varchar(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `datban`
+--
+
+INSERT INTO `datban` (`MaDB`, `MaBan`, `ThoiGian`, `MaKH`, `IsDeleted`) VALUES
+('DB00001', 'B00001', '2028-02-29 00:00:00', 'KH00001', '1');
 
 -- --------------------------------------------------------
 
@@ -288,7 +298,7 @@ CREATE TABLE `hoadon` (
   `MaKH` varchar(10) NOT NULL,
   `TongTien` varchar(15) NOT NULL,
   `NgayXuat` varchar(10) NOT NULL,
-  `TrangThai` varchar(20) NOT NULL
+  `TrangThai` varchar(20) NOT NULL DEFAULT 'Chưa thanh toán'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -296,11 +306,11 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `TongTien`, `NgayXuat`, `TrangThai`) VALUES
-('HD00001', 'NV00001', 'KH00001', '75000', '2025-08-27', 'Hiện'),
-('HD00002', 'NV00002', 'KH00002', '50000', '2025-08-27', 'Hiện'),
-('HD00003', 'NV00001', 'KH00001', '82000', '2025-08-28', 'Hiện'),
-('HD00004', 'NV00001', 'KH00001', '150000', '2025-08-29', 'Hiện'),
-('HD00005', 'NV00002', 'KH00002', '64000', '2025-08-29', 'Hiện');
+('HD00001', 'NV00001', 'KH00001', '75000', '2025-08-27', 'Chưa thanh toán'),
+('HD00002', 'NV00002', 'KH00002', '50000', '2025-08-27', 'Chưa thanh toán'),
+('HD00003', 'NV00001', 'KH00001', '82000', '2025-08-28', 'Chưa thanh toán'),
+('HD00004', 'NV00001', 'KH00001', '150000', '2025-08-29', 'Chưa thanh toán'),
+('HD00005', 'NV00002', 'KH00002', '64000', '2025-08-29', 'Chưa thanh toán');
 
 -- --------------------------------------------------------
 
@@ -330,10 +340,10 @@ INSERT INTO `hoadonban` (`MaHD`, `MaBan`) VALUES
 --
 
 CREATE TABLE `khachhang` (
-  `MaKhachHang` varchar(10) NOT NULL,
+  `MaKH` varchar(10) NOT NULL,
   `TenKH` varchar(100) NOT NULL,
   `SDT` varchar(12) NOT NULL,
-  `DiaChi` varchar(200) NOT NULL,
+  `DiaChi` varchar(200) DEFAULT NULL,
   `IsDeleted` varchar(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -341,10 +351,29 @@ CREATE TABLE `khachhang` (
 -- Đang đổ dữ liệu cho bảng `khachhang`
 --
 
-INSERT INTO `khachhang` (`MaKhachHang`, `TenKH`, `SDT`, `DiaChi`, `IsDeleted`) VALUES
+INSERT INTO `khachhang` (`MaKH`, `TenKH`, `SDT`, `DiaChi`, `IsDeleted`) VALUES
 ('KH00001', 'Nguyễn Văn A', '0901234567', 'Hà Nội', '0'),
 ('KH00002', 'Trần Thị B', '0902345678', 'Hồ Chí Minh', '0'),
 ('KH00003', 'Lê Văn C', '0903456789', 'Đà Nẵng', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `kho`
+--
+
+CREATE TABLE `kho` (
+  `MaCTPN` varchar(10) NOT NULL,
+  `SoLuongTon` varchar(10) NOT NULL,
+  `NgayHetHan` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `kho`
+--
+
+INSERT INTO `kho` (`MaCTPN`, `SoLuongTon`, `NgayHetHan`) VALUES
+('CTPN00001', '16', '2026-08-31');
 
 -- --------------------------------------------------------
 
@@ -354,18 +383,19 @@ INSERT INTO `khachhang` (`MaKhachHang`, `TenKH`, `SDT`, `DiaChi`, `IsDeleted`) V
 
 CREATE TABLE `loaidanhmuc` (
   `MaLDM` varchar(10) NOT NULL,
-  `TenLDM` varchar(100) NOT NULL
+  `TenLDM` varchar(100) NOT NULL,
+  `IsDeleted` varchar(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `loaidanhmuc`
 --
 
-INSERT INTO `loaidanhmuc` (`MaLDM`, `TenLDM`) VALUES
-('LDM00001', 'Gà rán'),
-('LDM00002', 'Combo'),
-('LDM00003', 'Đồ uống'),
-('LDM00004', 'Tráng miệng');
+INSERT INTO `loaidanhmuc` (`MaLDM`, `TenLDM`, `IsDeleted`) VALUES
+('LDM00001', 'Gà rán', '0'),
+('LDM00002', 'Combo', '0'),
+('LDM00003', 'Đồ uống', '0'),
+('LDM00004', 'Tráng miệng', '0');
 
 -- --------------------------------------------------------
 
@@ -451,7 +481,7 @@ CREATE TABLE `phieunhap` (
   `MaNCC` varchar(10) NOT NULL,
   `TongTien` varchar(15) NOT NULL,
   `NgayNhap` varchar(10) NOT NULL,
-  `TrangThai` varchar(20) NOT NULL DEFAULT 'Hiện'
+  `TrangThai` varchar(20) NOT NULL DEFAULT 'Chưa xác nhận'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -459,8 +489,8 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`MaPN`, `MaNV`, `MaNCC`, `TongTien`, `NgayNhap`, `TrangThai`) VALUES
-('PN00001', 'NV00003', 'NCC00001', '3000000', '2025-08-01', 'Hiện'),
-('PN00002', 'NV00003', 'NCC00002', '1500000', '2025-08-15', 'Hiện');
+('PN00001', 'NV00003', 'NCC00001', '3000000', '2025-08-01', 'Chưa xác nhận'),
+('PN00002', 'NV00003', 'NCC00002', '1500000', '2025-08-15', 'Chưa xác nhận');
 
 -- --------------------------------------------------------
 
@@ -625,7 +655,7 @@ ALTER TABLE `hoadonban`
 -- Chỉ mục cho bảng `khachhang`
 --
 ALTER TABLE `khachhang`
-  ADD PRIMARY KEY (`MaKhachHang`),
+  ADD PRIMARY KEY (`MaKH`),
   ADD UNIQUE KEY `SDT` (`SDT`),
   ADD UNIQUE KEY `SDT_2` (`SDT`);
 

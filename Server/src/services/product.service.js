@@ -40,9 +40,17 @@ exports.addProduct = (data, callback) => {
   const { MaSP, TenSP, GiaSP, MoTaSP, AnhSP } = data;
 
   // Kiểm tra dữ liệu trống
-  if (!TenSP || !MoTaSP || !GiaSP || !AnhSP) {
-    return callback({ status: 400, message: "Vui lòng nhập đầy đủ thông tin" });
-  }
+  // if (!TenSP || !MoTaSP || !GiaSP || !AnhSP) {
+  //   return callback({ status: 400, message: "Vui lòng nhập đầy đủ thông tin" });
+  // }
+  if(!TenSP)
+    return callback({ status: 400, message: "Vui lòng nhập tên sản phẩm" });
+  if(!MoTaSP)
+    return callback({ status: 400, message: "Vui lòng nhập mô tả sản phẩm" }); 
+  if(!GiaSP)
+    return callback({ status: 400, message: "Vui lòng nhập giá sản phẩm" });
+  if(!AnhSP)
+    return callback({ status: 400, message: "Vui lòng chọn ảnh sản phẩm" });
 
   // Validate dữ liệu
   const error = validatePrice(GiaSP);

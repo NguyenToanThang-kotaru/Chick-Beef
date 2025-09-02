@@ -28,7 +28,6 @@ axiosClient.interceptors.response.use(
       console.log("loadrftoke...")
       try {
         const res = await axios.post("http://localhost:3700/api/auth/refresh", {},{ withCredentials: true } );
-        console.log("thanh cong")
         const newAccessToken = res.data.accessToken;
         sessionStorage.setItem("accessToken", newAccessToken);
 
