@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
+
 // Middleware xác thực token
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -18,14 +19,24 @@ function authenticateToken(req, res, next) {
   });
 }
 
-// Middleware phân quyền theo role
-function authorizeRoles(...roles) {
+// Middleware phân quyền
+function authorizePermission(feature, action) {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
+    if (!req.user || !req.user.permissions) {
       return res.status(403).json({ message: "Không có quyền truy cập" });
     }
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    const hasPermission = req.user.permissions.some(
+      (p) => p.feature === feature && p.action === action
+    );
+
+    if (!hasPermission) {
+      return res.status(403).json({ message: "Không có quyền truy cập" });
+    }
+
     next();
   };
 }
 
-module.exports = { authenticateToken, authorizeRoles };
+module.exports = { authenticateToken, authorizePermission};

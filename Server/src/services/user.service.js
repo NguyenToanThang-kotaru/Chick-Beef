@@ -27,3 +27,7 @@ exports.login = (username, password, callback) => {
   
   userModel.login(username, password, callback);
 }
+
+exports.getPermissionDetailsByPermissionId = (permissionId, callback) => {
+  userModel.getPermissionDetailsByPermissionId(permissionId, callback)
+}
