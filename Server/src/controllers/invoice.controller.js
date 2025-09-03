@@ -9,12 +9,19 @@ exports.getAllInvoice = (req, res) => {
   });
 };
 
+exports.getInvoiceStay = (req, res) => {
+  invoiceService.getInvoiceStay((err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(results);
+  });
+}
+
 exports.getInvoiceById = (req, res) => {
   const id = req.params.id;
 
   invoiceService.getInvoiceById(id, (err, result) => {
     if (err) return res.status(500).json({ error: err });
-    if (!result) return res.status(404).json({ message: "Không tìm thấy hóa đơn" });
+    if (!result) return res.status(404).json({ message: "Không tìm thấy hóa đơnnnn" });
     res.json(result);
   });
 };
@@ -38,11 +45,32 @@ exports.getInvoicesByMonth = (req, res) => {
   });
 };
 
+exports.getInvoiceTakeAway = (req, res) => {
+  invoiceService.getInvoiceTakeAway((err, results) => {
+    if (err) return res.status(500).json({ error: "Lỗi sever" });
+    res.json(results);
+  });
+}
+
 exports.addInvoice = (req, res) => {
   const invoiceData = req.body;
 
   invoiceService.addInvoice(invoiceData, (err, result) => {
     if (err) return res.status(500).json({ error: err });
     res.status(201).json({ message: "Thêm hóa đơn thành công", invoice: result });
+  });
+};
+
+exports.updateStatusInvoice = (req, res) => {
+  const id = req.params.id;
+  const invoiceData = req.body;
+
+  invoiceService.updateStatusInvoice(id, invoiceData, (err, result) => {
+    if (err) {
+      const status = err.status || 500;
+      return res.status(status).json({ error: { message: err.message } });
+    }
+
+    res.status(200).json({ success: true, message: "Cập nhật trạng thái hóa đơn thành công", invoice: result });
   });
 };

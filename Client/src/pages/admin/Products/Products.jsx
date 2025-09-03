@@ -1,20 +1,126 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "../../../Components/table_cpn";
 import SearchBar from "../../../Components/searchBar";
 import AddOrEditProduct from "./AddOrEditProduct";
 import eye from "../../../assets/Icon/Eye.png";
-import pd from "../../../assets/Icon/product.png";
+import edit from "../../../assets/Icon/Edit.png";
+import deleteIcon from "../../../assets/Icon/delete.png";
+import axiosClient from "../../../middleware/axiosClient";
+import { toast } from "react-toastify";
+import ConfirmDialog from "../../../Components/dialog/confirmDialog";
+
 export default function Products() {
   const [showAddForm, setShowAddForm] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [openConfirm, setOpenConfirm] = useState(false);
+
+  const handleDeleteClick = (product) => {
+    const deleteProduct = async () => {
+      try {
+        const res = await axiosClient.put(`/product/delete/${product.MaSP}`);
+        toast.success(res.data.message || "Xóa sản phẩm thành công");
+        // cập nhật lại danh sách
+        setProducts((prev) => prev.filter((p) => p.MaSP !== product.MaSP));
+        setOpenConfirm(false);
+      } catch (err) {
+        console.error("Lỗi khi xóa sản phẩm:", err);
+        toast.error("Xóa sản phẩm thất bại");
+      }
+      // console.log("Xóa sản phẩm:", product);
+    };
+    deleteProduct();
+  };
+
+  const handleSearch = (value) => {
+    const fetchSearchedProducts = async () => {
+      try {
+        const res = await axiosClient.get(`/product/search?keyword=${value}`);
+        setProducts(res.data); // lưu vào state
+        console.log("Sản phẩm tìm kiếm:", res.data);
+      } catch (err) {
+        console.error("Lỗi khi tìm kiếm sản phẩm:", err);
+      }
+    };
+    fetchSearchedProducts();
+  };
+
+  const handleAddProduct = async (product) => {
+    try {
+      await axios.post("http://localhost:5000/api/products", product);
+      alert("Thêm sản phẩm thành công!");
+    } catch (err) {
+      console.error("Lỗi khi thêm:", err);
+    }
+  };
+
+  const handleUpdateProduct = async (product) => {
+    try {
+      await axios.put(
+        `http://localhost:5000/api/products/${product.MaSP}`,
+        product
+      );
+      alert("Sửa sản phẩm thành công!");
+    } catch (err) {
+      console.error("Lỗi khi sửa:", err);
+    }
+  };
+  // Lấy danh sách sản phẩm
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await axiosClient.get("/product");
+        setProducts(res.data); // lưu vào state
+        console.log("Sản phẩm:", res.data);
+      } catch (err) {
+        console.error("Lỗi khi lấy danh sách sản phẩm:", err);
+      }
+    };
+    fetchProducts();
+    // Gọi API lấy danh sách sản phẩm và cập nhật state
+    // Ví dụ:
+    // fetchProducts().then(data => setProducts(data));
+  }, []);
   if (showAddForm) {
-    return <AddOrEditProduct onBack={() => setShowAddForm(false)} />;
+    return (
+      <AddOrEditProduct
+        data={selectedProduct} // \ truyền data khi sửa
+        onBack={() => {
+          setShowAddForm(false);
+          setSelectedProduct(null); // clear lại khi đóng form
+        }}
+        onAdd={(newProduct) => {
+          setProducts((prev) => [...prev, newProduct]); // khi thêm mới
+          setShowAddForm(false);
+        }}
+        onUpdate={(updatedProduct) => {
+          setProducts((prev) =>
+            prev.map((p) =>
+              p.MaSP === updatedProduct.MaSP ? updatedProduct : p
+            )
+          ); // khi sửa thì cập nhật lại state
+          setShowAddForm(false);
+          setSelectedProduct(null);
+        }}
+      />
+    );
   }
+  const data = { products };
+  console.log(data);
 
   return (
     <div className="h-full flex flex-col">
+      <ConfirmDialog
+        open={openConfirm}
+        onClose={() => setOpenConfirm(false)}
+        onConfirm={handleDeleteClick}
+        title="Xác nhận xóa"
+        message={`Bạn có chắc chắn muốn xóa sản phẩm "${selectedProduct?.TenSP}" không?`}
+      />
       <div className="bg-[#2A435D] p-4 flex items-center justify-between h-[75px]">
-        <SearchBar></SearchBar>
-        <button 
+        <SearchBar placeholder="Tìm kiếm sản phẩm..." onSearch={handleSearch} />
+        <button
           className="bg-white text-[#2A435D] font-bold px-6 h-12 rounded-full text-xl shadow-md hover:bg-gray-100 flex items-center justify-center"
           onClick={() => setShowAddForm(true)}
         >
@@ -23,17 +129,45 @@ export default function Products() {
       </div>
 
       <div className="bg-[#FFF8F0] m-5 rounded-2xl shadow-[0_1px_4px_3px_rgba(0,0,0,0.25)] flex-1 overflow-y-auto scrollbar-hide">
-        <Table className=""
-          data={[
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-            { Id: 1, Image: <img src={pd} alt="eye" className="w-20 h-20 cursor-pointer" />, Name: "Món ăn 1", Price: "1.000.000 VND", watch: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>, edit: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer"/>,  delete: <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" /> },
-          ]}
+        <Table
+          className=""
+          data={products.map((item, index) => ({
+            Id: index + 1,
+            Image: (
+              <img
+                src={"../src/assets/food/" + item.AnhSP}
+                alt="eye"
+                className="w-20 h-20 cursor-pointer"
+              />
+            ),
+            Name: item.TenSP,
+            Price: Number(item.GiaSP).toLocaleString("vi-VN") + " VND",
+            watch: (
+              <img src={eye} alt="eye" className="w-6 h-6 cursor-pointer" />
+            ),
+            edit: (
+              <img
+                src={edit}
+                alt="eye"
+                className="w-6 h-6 cursor-pointer"
+                onClick={() => {
+                  setSelectedProduct(item);
+                  setShowAddForm(true);
+                }}
+              />
+            ),
+            delete: (
+              <img
+                src={deleteIcon}
+                alt="eye"
+                className="w-6 h-6 cursor-pointer"
+                onClick={() => {
+                  setOpenConfirm(true);
+                  setSelectedProduct(item);
+                }}
+              />
+            ),
+          }))}
         />
       </div>
     </div>

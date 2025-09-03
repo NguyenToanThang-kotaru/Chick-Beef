@@ -36,10 +36,15 @@ exports.addEmployee = (data, callback) => {
   }
 
   // Validate dữ liệu
-  const error = validateName(TenNV) || validatePhone(SDT) || validateAddress(DiaChi);
+  const error = validateName(TenNV) || validatePhone(SDT);
   if (error) {
     return callback({ status: 400, message: error });
   }
+
+  if(TenNV.length > 100)
+    return callback({ status: 400, message: "Tên nhân viên không được vượt quá 100 ký tự" });
+  if(DiaChi.length > 200)
+    return callback({ status: 400, message: "Địa chỉ không được vượt quá 200 ký tự" });
 
   // Kiểm tra số điện thoại trùng
   employeeModel.checkPhoneExists(SDT, (err, exists) => {
@@ -48,7 +53,7 @@ exports.addEmployee = (data, callback) => {
       return callback({ status: 400, message: "Số điện thoại đã tồn tại" });
     }
 
-    // 4. Thêm nhân viên vào DB
+    // Thêm nhân viên vào DB
     const employeeData = { MaNV, TenNV, DiaChi, SDT, MaVT };
     employeeModel.addEmployee(employeeData, (err, result) => {
       if (err) return callback({ status: 500, message: err.message });

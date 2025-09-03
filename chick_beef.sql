@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 29, 2025 lúc 05:42 PM
+-- Thời gian đã tạo: Th8 30, 2025 lúc 01:50 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -320,7 +320,6 @@ CREATE TABLE `hoadonban` (
 INSERT INTO `hoadonban` (`MaHD`, `MaBan`) VALUES
 ('HD00001', 'B00001'),
 ('HD00003', 'B00002'),
-('HD00003', 'B00003'),
 ('HD00004', 'B00001'),
 ('HD00005', 'B00002');
 
@@ -615,6 +614,12 @@ ALTER TABLE `hanhdong`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`MaHD`);
+
+--
+-- Chỉ mục cho bảng `hoadonban`
+--
+ALTER TABLE `hoadonban`
+  ADD UNIQUE KEY `MaHD` (`MaHD`);
 
 --
 -- Chỉ mục cho bảng `khachhang`

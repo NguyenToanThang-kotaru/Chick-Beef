@@ -7,7 +7,13 @@ const authenticateToken = require('../middleware/authMiddleware');
 router.get('/nextid', authenticateToken.authenticateToken, invoiceController.getNextInvoiceId);
 
 // GET /api/invoice
-router.get('/', authenticateToken.authenticateToken, invoiceController.getAllInvoice);
+router.get('/',authenticateToken.authenticateToken,  invoiceController.getAllInvoice);
+
+// GET /api/invoice/takeaway
+router.get('/takeaway', authenticateToken.authenticateToken,invoiceController.getInvoiceTakeAway);
+
+//GET /api/invoice/stay
+router.get('/stay',authenticateToken.authenticateToken, invoiceController.getInvoiceStay);
 
 // GET /api/invoice/:id
 router.get('/:id', authenticateToken.authenticateToken, invoiceController.getInvoiceById);
@@ -15,7 +21,12 @@ router.get('/:id', authenticateToken.authenticateToken, invoiceController.getInv
 //GET /api/invoice/:id
 router.get('/month/:year/:month', authenticateToken.authenticateToken,invoiceController.getInvoicesByMonth);
 
+// GET /api/invoice/takeaway
+
 // POST /api/invoice
 router.post('/', authenticateToken.authenticateToken, invoiceController.addInvoice);
+
+// PUT /api/invoice/update/:id
+router.put('/update/:id', authenticateToken.authenticateToken, invoiceController.updateStatusInvoice);
 
 module.exports = router;
